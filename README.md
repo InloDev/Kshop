@@ -1,0 +1,1 @@
+﻿The project is a store template. It will be built using modularity and a domain-driven design (DDD) in .NET.
