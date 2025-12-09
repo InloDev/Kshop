@@ -227,7 +227,6 @@ proguard/
 # Android Studio Navigation editor temp files
 .navigation/
 
-*.DotSettings
 .vs
 *.local.json
 
