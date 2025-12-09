@@ -5,7 +5,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SulutionFiles", "SulutionFi
 		Directory.Build.props = Directory.Build.props
 		editorconfig = editorconfig
 		Shop.sln.DotSettings = Shop.sln.DotSettings
-		.gitignore = .gitignore
+		..\.gitignore = ..\.gitignore
 	EndProjectSection
 EndProject
 Global
