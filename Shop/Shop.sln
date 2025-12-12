@@ -8,9 +8,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SulutionFiles", "SulutionFi
 		..\.gitignore = ..\.gitignore
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commerce", "Commerce", "{ABC6217F-A86F-4C8F-B5EB-9567F9D5A23B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductManagement", "ProductManagement", "{E3297E6D-296B-404D-9CFA-13616EF739EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Commerce\ProductManagement\Domain\Domain.csproj", "{3C613639-9687-49F3-A79F-0E9A5582BC9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E3297E6D-296B-404D-9CFA-13616EF739EE} = {ABC6217F-A86F-4C8F-B5EB-9567F9D5A23B}
+		{3C613639-9687-49F3-A79F-0E9A5582BC9E} = {E3297E6D-296B-404D-9CFA-13616EF739EE}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C613639-9687-49F3-A79F-0E9A5582BC9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C613639-9687-49F3-A79F-0E9A5582BC9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C613639-9687-49F3-A79F-0E9A5582BC9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C613639-9687-49F3-A79F-0E9A5582BC9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
