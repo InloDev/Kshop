@@ -21,9 +21,3 @@ internal sealed class Discount
         return money.Amount - _amount;
     }
 }
-
-internal enum DiscountType
-{
-    Percentage,
-    FixedAmount
-}

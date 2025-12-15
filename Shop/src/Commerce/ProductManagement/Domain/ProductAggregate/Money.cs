@@ -3,20 +3,12 @@
 internal sealed class Money
 {
     internal readonly decimal Amount;
-    internal Currency Currency;
+    internal CurrencyType CurrencyType;
 
-    public Money(decimal amount, Currency currency)
+    public Money(decimal amount, CurrencyType currencyType)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(amount);
         Amount = amount;
-        Currency = currency;
+        CurrencyType = currencyType;
     }
-}
-
-internal enum Currency
-{
-    USD,
-    EUR,
-    RUB,
-    MDL
 }
