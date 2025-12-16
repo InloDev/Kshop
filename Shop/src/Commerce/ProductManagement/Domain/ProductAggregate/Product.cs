@@ -5,13 +5,13 @@ internal sealed class Product
     private Guid _id;
     private string _name;
     private string _description;
-    private List<ProductVariant> _variants =new ();
+    private readonly List<ProductVariant> _variants = new();
 
     internal Product(string productName, string description, string variantName, Money price, Discount? discount,
         string sku)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(productName,"Название продукта не может быть пустым.");
-        ArgumentException.ThrowIfNullOrWhiteSpace(description,"Продукт обязан содержать описание.");
+        ArgumentException.ThrowIfNullOrWhiteSpace(productName, "Название продукта не может быть пустым.");
+        ArgumentException.ThrowIfNullOrWhiteSpace(description, "Продукт обязан содержать описание.");
         _id = Guid.NewGuid();
         _name = productName;
         _description = description;
@@ -24,37 +24,34 @@ internal sealed class Product
         return new Product(productName, description, variantName, price, discount, sku);
     }
 
-    internal void Update(string? productName, string? description, string? variantName, Money? price, Discount? discount,
+    internal void Update(string? productName, string? description, string? variantName, Money? price,
+        Discount? discount,
         string? sku)
     {
-        if(productName is not null) {_name = productName;}
-        if(description is not null) {_description = description;}
-        if(sku is not null) 
+        if (productName is not null) _name = productName;
+        if (description is not null) _description = description;
+        if (sku is not null)
         {
-            bool isContains = false;
+            var isContains = false;
             foreach (var variant in _variants)
-            {
                 if (variant.Sku == sku)
                 {
-                   if(variantName is not null) variant.Name = variantName;
-                   if(price is not null) variant.Price= price;
-                   if(discount is not null) variant.Discount= discount;
+                    if (variantName is not null) variant.Name = variantName;
+                    if (price is not null) variant.Price = price;
+                    if (discount is not null) variant.Discount = discount;
                     isContains = true;
                     break;
                 }
-            }
-            if (!isContains) 
-            { 
-                AddVariant(variantName!, price!, discount, sku);
-            }
+
+            if (!isContains) AddVariant(variantName!, price!, discount, sku);
         }
-        
     }
 
     internal void AddVariant(ProductVariant variant)
     {
         _variants.Add(variant);
     }
+
     internal void AddVariant(string name, Money price, Discount? discount,
         string sku)
     {
