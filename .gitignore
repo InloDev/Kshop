@@ -213,7 +213,6 @@ local.properties
 # generated files
 bin/
 gen/
-obj/
 
 # Gradle files
 .gradle/
@@ -226,5 +225,3 @@ proguard/
 
 .vs
 *.local.json
-
-/Shop/src/Commerce/ProductManagement/Domain/obj/

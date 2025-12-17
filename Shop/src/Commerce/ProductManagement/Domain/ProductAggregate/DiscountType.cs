@@ -1,6 +1,6 @@
-namespace Domain.ProductAggregate;
+namespace KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 
-internal enum DiscountType
+public enum DiscountType
 {
     Percentage = 1,
     FixedAmount = 2

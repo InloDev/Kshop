@@ -1,23 +1,19 @@
-﻿namespace Domain.ProductAggregate;
+﻿namespace KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 
-internal sealed class Discount
+public sealed record Discount
 {
-    private readonly decimal _amount;
-    private readonly DiscountType _discountType;
+    public decimal Amount { get; }
+    public DiscountType DiscountType { get; }
 
     public Discount(decimal amount, DiscountType discountType)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(amount);
-        if (_discountType == DiscountType.Percentage)
+        if (DiscountType == DiscountType.Percentage)
+        {
             ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(amount, 100);
-        _amount = amount;
-        _discountType = discountType;
-    }
+        }
 
-    public decimal CalculateDiscountedPrice(Money money)
-    {
-        if (_discountType != DiscountType.FixedAmount) return money.Amount * (_amount / 100);
-        ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(_amount, money.Amount);
-        return money.Amount - _amount;
+        Amount = amount;
+        DiscountType = discountType;
     }
 }
