@@ -8,12 +8,13 @@ public sealed record ProductVariant
     public Price Price { get; }
     public Discount? Discount { get; }
 
-    public ProductVariant(string name, Price price, Discount? discount,
+    public ProductVariant(Guid id, string name, Price price, Discount? discount,
                           string sku)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(name, "Название варианта продукта не может быть пустым.");
-        ArgumentException.ThrowIfNullOrWhiteSpace(sku, "Sku код не может быть пустым.");
-        Id = Guid.NewGuid();
+        ArgumentException.ThrowIfNullOrWhiteSpace(name);
+        ArgumentException.ThrowIfNullOrWhiteSpace(sku);
+
+        Id = id;
         Name = name;
         Price = price;
         Discount = discount;

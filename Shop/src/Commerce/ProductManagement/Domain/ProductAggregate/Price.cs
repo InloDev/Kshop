@@ -8,6 +8,7 @@ public sealed record Price
     public Price(decimal amount, CurrencyCode currency)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(amount);
+
         Amount = amount;
         Currency = currency;
     }
