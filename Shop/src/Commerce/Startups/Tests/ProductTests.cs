@@ -14,8 +14,6 @@ public sealed class ProductTests
     private static IReadOnlySet<ProductVariant> CreateVariants(string variantNumber)
         => new HashSet<ProductVariant> { CreateVariant(variantNumber) };
 
-    //  private static Product _product = new Product(Guid.NewGuid(), "Product", "Description", CreateVariants());
-
     #region CreateProductRegion
 
     [Fact]
