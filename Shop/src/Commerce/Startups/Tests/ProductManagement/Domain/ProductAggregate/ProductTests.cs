@@ -95,19 +95,14 @@ public sealed class ProductTests
             new Price(100M, CurrencyCode.USD),
             null,
             "SKU-002");
+
         const string newName = "New name";
         const string newDescription = "New description";
 
         product.Update(newName, newDescription, new HashSet<ProductVariant> { newVariant });
 
-        var actualName = product.Name;
-        var actualDescription = product.Description;
-
-        const string expectedName = "New name";
-        const string expectedDescription = "New description";
-
-        Assert.Equal(expectedName, actualName);
-        Assert.Equal(expectedDescription, actualDescription);
+        Assert.Equal(newName, product.Name);
+        Assert.Equal(newDescription, product.Description);
         Assert.Equal(newVariant, product.Variants.Single());
     }
 
