@@ -5,7 +5,8 @@ public sealed record Price
     public decimal Amount { get; }
     public CurrencyCode Currency { get; }
 
-    public Price(decimal amount, CurrencyCode currency)
+    public Price(decimal amount,
+                 CurrencyCode currency)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(amount);
 

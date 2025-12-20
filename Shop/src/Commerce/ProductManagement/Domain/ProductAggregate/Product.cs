@@ -8,7 +8,10 @@ public sealed class Product
     public string Description { get; private set; }
     public IReadOnlySet<ProductVariant> Variants => _variants;
 
-    public Product(Guid id, string productName, string description, IReadOnlySet<ProductVariant> variants)
+    public Product(Guid id,
+                   string productName,
+                   string description,
+                   IReadOnlySet<ProductVariant> variants)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(productName);
         ArgumentException.ThrowIfNullOrWhiteSpace(description);
@@ -21,10 +24,14 @@ public sealed class Product
         _variants = variants.ToHashSet();
     }
 
-    public static Product Create(string productName, string description, IReadOnlySet<ProductVariant> variants)
+    public static Product Create(string productName,
+                                 string description,
+                                 IReadOnlySet<ProductVariant> variants)
         => new(Guid.NewGuid(), productName, description, variants);
 
-    public void Update(string productName, string description, IReadOnlySet<ProductVariant> variants)
+    public void Update(string productName,
+                       string description,
+                       IReadOnlySet<ProductVariant> variants)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(productName);
         ArgumentException.ThrowIfNullOrWhiteSpace(description);
