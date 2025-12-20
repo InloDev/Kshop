@@ -343,13 +343,19 @@ resharper_wrap_before_arrow_with_expressions = true
 resharper_wrap_chained_binary_expressions = chop_if_long
 resharper_wrap_before_binary_pattern_op = false
 resharper_wrap_arguments_style = chop_if_long
-resharper_csharp_wrap_parameters_style = chop_always
+resharper_csharp_wrap_parameters_style = chop_if_long
+resharper_csharp_max_formal_parameters_on_line = 3
 resharper_wrap_before_invocation_lpar = false
 resharper_wrap_after_invocation_lpar = false
 resharper_wrap_before_invocation_rpar = false
 resharper_wrap_array_initializer_style = chop_if_long
 resharper_wrap_object_and_collection_initializer_style = chop_if_long
 resharper_max_initializer_elements_on_line = 1
+
+# Method signature wrapping
+resharper_wrap_after_declaration_lpar = true
+resharper_wrap_before_declaration_rpar = false
+resharper_csharp_place_simple_method_on_single_line = true
 
 # Braces and code style
 resharper_use_indent_from_vs = false

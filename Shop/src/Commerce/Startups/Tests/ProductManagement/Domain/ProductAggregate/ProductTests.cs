@@ -29,18 +29,19 @@ public sealed class ProductTests
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void Create_InvalidName_ThrowsArgumentException(string? name) => Assert.Throws<ArgumentException>(()
-        => Product.Create(
-            name!,
-            "Description",
-            new HashSet<ProductVariant>
-            {
-                new(
-                    "Variant",
-                    new Price(100M, CurrencyCode.USD),
-                    null,
-                    "SKU-001")
-            }));
+    public void Create_InvalidName_ThrowsArgumentException(string? name)
+        => Assert.Throws<ArgumentException>(()
+            => Product.Create(
+                name!,
+                "Description",
+                new HashSet<ProductVariant>
+                {
+                    new(
+                        "Variant",
+                        new Price(100M, CurrencyCode.USD),
+                        null,
+                        "SKU-001")
+                }));
 
     [Theory]
     [InlineData(null)]
