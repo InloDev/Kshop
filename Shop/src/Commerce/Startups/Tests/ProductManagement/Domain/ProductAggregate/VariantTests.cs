@@ -9,7 +9,7 @@ public sealed class VariantTests
     {
         var variant = new ProductVariant(
             "Variant",
-            new Price(100M, CurrencyCode.Usd),
+            new Price(100M, CurrencyCode.USD),
             null,
             "SKU-001");
 
@@ -25,7 +25,7 @@ public sealed class VariantTests
         => Assert.Throws<ArgumentException>(() =>
             new ProductVariant(
                 name!,
-                new Price(100M, CurrencyCode.Usd),
+                new Price(100M, CurrencyCode.USD),
                 null,
                 "SKU-001"));
 
@@ -37,7 +37,7 @@ public sealed class VariantTests
         => Assert.Throws<ArgumentException>(() =>
             new ProductVariant(
                 "Variant",
-                new Price(100M, CurrencyCode.Usd),
+                new Price(100M, CurrencyCode.USD),
                 null,
                 sku!));
 }

@@ -11,7 +11,7 @@ public sealed class ProductTests
         const string description = "Description";
         var variant = new ProductVariant(
             "Variant",
-            new Price(100M, CurrencyCode.Usd),
+            new Price(100M, CurrencyCode.USD),
             null,
             "SKU-001");
 
@@ -37,7 +37,7 @@ public sealed class ProductTests
             {
                 new(
                     "Variant",
-                    new Price(100M, CurrencyCode.Usd),
+                    new Price(100M, CurrencyCode.USD),
                     null,
                     "SKU-001")
             }));
@@ -54,7 +54,7 @@ public sealed class ProductTests
             {
                 new(
                     "Variant",
-                    new Price(100M, CurrencyCode.Usd),
+                    new Price(100M, CurrencyCode.USD),
                     null,
                     "SKU-001")
             }));
@@ -84,14 +84,14 @@ public sealed class ProductTests
             {
                 new(
                     "Variant1",
-                    new Price(100M, CurrencyCode.Usd),
+                    new Price(100M, CurrencyCode.USD),
                     null,
                     "SKU-001")
             });
 
         var newVariant = new ProductVariant(
             "Variant2",
-            new Price(100M, CurrencyCode.Usd),
+            new Price(100M, CurrencyCode.USD),
             null,
             "SKU-002");
         const string newName = "New name";
@@ -121,7 +121,7 @@ public sealed class ProductTests
             {
                 new(
                     "Variant1",
-                    new Price(100M, CurrencyCode.Usd),
+                    new Price(100M, CurrencyCode.USD),
                     null,
                     "SKU-001")
             });

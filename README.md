@@ -16,7 +16,7 @@
   - ❌ `decimal price = 100;`
   - ❌ `decimal price = 100.0;`
   - ✅ `decimal price = 100M;`
-  - ✅ `new Price(100M, CurrencyCode.Usd)`
+  - ✅ `new Price(100M, CurrencyCode.USD)`
 
 ## Соглашения по тестированию
 
