@@ -1,14 +1,14 @@
 ﻿using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 
-namespace KShop.Commerce.Startups.Tests;
+namespace KShop.Commerce.Startups.Tests.ProductManagement.Domain.ProductAggregate;
 
 public sealed class ProductTests
 {
     [Fact]
     public void CreateProduct_ValidArguments()
     {
-        var productName = "Product";
-        var descrition = "Description";
+        const string productName = "Product";
+        const string description = "Description";
         var variant = new ProductVariant(
             "Variant",
             new Price(100, CurrencyCode.Usd),
@@ -17,11 +17,11 @@ public sealed class ProductTests
 
         var product = Product.Create(
             productName,
-            descrition,
+            description,
             new HashSet<ProductVariant> { variant });
 
         Assert.Equal(productName, product.Name);
-        Assert.Equal(descrition, product.Description);
+        Assert.Equal(description, product.Description);
         Assert.True(product.Variants.Contains(variant));
     }
 
@@ -34,7 +34,7 @@ public sealed class ProductTests
         "Description",
         new HashSet<ProductVariant>
         {
-            new ProductVariant(
+            new(
                 "Variant",
                 new Price(100, CurrencyCode.Usd),
                 null,
@@ -51,7 +51,7 @@ public sealed class ProductTests
             description!,
             new HashSet<ProductVariant>
             {
-                new ProductVariant(
+                new(
                     "Variant",
                     new Price(100, CurrencyCode.Usd),
                     null,
@@ -81,33 +81,32 @@ public sealed class ProductTests
             "Old description",
             new HashSet<ProductVariant>
             {
-                new ProductVariant(
+                new(
                     "Variant1",
                     new Price(100, CurrencyCode.Usd),
                     null,
                     "SKU-001")
             });
 
-        var newVariants = new ProductVariant(
+        var newVariant = new ProductVariant(
             "Variant2",
             new Price(100, CurrencyCode.Usd),
             null,
             "SKU-002");
-        var newName = "New name";
-        var newDescription = "New description";
+        const string newName = "New name";
+        const string newDescription = "New description";
 
-        product.Update(newName, newDescription, new HashSet<ProductVariant> { newVariants });
+        product.Update(newName, newDescription, new HashSet<ProductVariant> { newVariant });
 
         var actualName = product.Name;
         var actualDescription = product.Description;
 
-        var expectedName = "New name";
-        var expectedDescription = "New description";
-        var expectedVariants = newVariants;
+        const string expectedName = "New name";
+        const string expectedDescription = "New description";
 
-        Assert.Equal(actualName, expectedName);
-        Assert.Equal(actualDescription, expectedDescription);
-        Assert.True(product.Variants.Contains(expectedVariants));
+        Assert.Equal(expectedName, actualName);
+        Assert.Equal(expectedDescription, actualDescription);
+        Assert.Equal(newVariant, product.Variants.Single());
     }
 
     [Fact]
@@ -119,7 +118,7 @@ public sealed class ProductTests
             "Old description",
             new HashSet<ProductVariant>
             {
-                new ProductVariant(
+                new(
                     "Variant1",
                     new Price(100, CurrencyCode.Usd),
                     null,

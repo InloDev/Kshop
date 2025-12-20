@@ -1,6 +1,6 @@
 using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 
-namespace KShop.Commerce.Startups.Tests;
+namespace KShop.Commerce.Startups.Tests.ProductManagement.Domain.ProductAggregate;
 
 public sealed class VariantTests
 {

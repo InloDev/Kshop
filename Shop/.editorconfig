@@ -256,7 +256,7 @@ dotnet_diagnostic.CS8618.severity = error
 dotnet_diagnostic.CS8625.severity = error
 
 # CS1591: Missing XML comment for publicly visible type or member
-dotnet_diagnostic.CS1591.severity = warning
+dotnet_diagnostic.CS1591.severity = none
 
 # CA1062: Validate arguments of public methods
 dotnet_diagnostic.CA1062.severity = warning
@@ -343,6 +343,7 @@ resharper_wrap_before_arrow_with_expressions = true
 resharper_wrap_chained_binary_expressions = chop_if_long
 resharper_wrap_before_binary_pattern_op = false
 resharper_wrap_arguments_style = chop_if_long
+resharper_csharp_wrap_parameters_style = chop_always
 resharper_wrap_before_invocation_lpar = false
 resharper_wrap_after_invocation_lpar = false
 resharper_wrap_before_invocation_rpar = false
