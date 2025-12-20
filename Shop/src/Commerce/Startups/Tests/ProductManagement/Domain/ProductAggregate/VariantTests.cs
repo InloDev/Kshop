@@ -5,11 +5,11 @@ namespace KShop.Commerce.Startups.Tests.ProductManagement.Domain.ProductAggregat
 public sealed class VariantTests
 {
     [Fact]
-    public void Create_ArgumentsValid()
+    public void Create_ValidArguments_Success()
     {
         var variant = new ProductVariant(
             "Variant",
-            new Price(100, CurrencyCode.Usd),
+            new Price(100M, CurrencyCode.Usd),
             null,
             "SKU-001");
 
@@ -21,11 +21,11 @@ public sealed class VariantTests
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void Create_NameInvalid(string? name)
+    public void Create_InvalidName_ThrowsArgumentException(string? name)
         => Assert.Throws<ArgumentException>(() =>
             new ProductVariant(
                 name!,
-                new Price(100, CurrencyCode.Usd),
+                new Price(100M, CurrencyCode.Usd),
                 null,
                 "SKU-001"));
 
@@ -33,11 +33,11 @@ public sealed class VariantTests
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void Create_SkuInvalid(string? sku)
+    public void Create_InvalidSku_ThrowsArgumentException(string? sku)
         => Assert.Throws<ArgumentException>(() =>
             new ProductVariant(
                 "Variant",
-                new Price(100, CurrencyCode.Usd),
+                new Price(100M, CurrencyCode.Usd),
                 null,
                 sku!));
 }
