@@ -3,18 +3,16 @@ namespace KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 public sealed record ProductVariant
 {
     public string Sku { get; }
-    public Guid Id { get; }
     public string Name { get; }
     public Price Price { get; }
     public Discount? Discount { get; }
 
-    public ProductVariant(Guid id, string name, Price price, Discount? discount,
+    public ProductVariant(string name, Price price, Discount? discount,
                           string sku)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
         ArgumentException.ThrowIfNullOrWhiteSpace(sku);
 
-        Id = id;
         Name = name;
         Price = price;
         Discount = discount;

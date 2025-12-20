@@ -1,76 +1,76 @@
 ﻿using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 
-namespace TestProject1;
+namespace KShop.Commerce.Startups.Tests;
 
 public sealed class ProductTests
 {
-    private static ProductVariant CreateVariant(string variantNumber)
-        => new(Guid.NewGuid(),
-            $"Variant {variantNumber}",
-            new Price(100, CurrencyCode.Usd),
-            null,
-            $"SKU-00{variantNumber}");
-
-    private static IReadOnlySet<ProductVariant> CreateVariants(string variantNumber)
-        => new HashSet<ProductVariant> { CreateVariant(variantNumber) };
-
-    #region CreateProductRegion
-
     [Fact]
     public void CreateProduct_ValidArguments()
     {
-        var product = new Product(
-            Guid.NewGuid(),
-            "Product",
-            "Description",
-            CreateVariants("1"));
+        var productName = "Product";
+        var descrition = "Description";
+        var variant = new ProductVariant(
+            "Variant",
+            new Price(100, CurrencyCode.Usd),
+            null,
+            "SKU-001");
 
-        Assert.NotEqual(Guid.Empty, product.Id);
-        Assert.Equal("Product", product.Name);
-        Assert.Equal("Description", product.Description);
+        var product = Product.Create(
+            productName,
+            descrition,
+            new HashSet<ProductVariant> { variant });
+
+        Assert.Equal(productName, product.Name);
+        Assert.Equal(descrition, product.Description);
+        Assert.True(product.Variants.Contains(variant));
     }
 
     [Theory]
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void CreateProduct_NameInvalid(string? name)
-        => Assert.Throws<ArgumentException>(() => new Product(
-            Guid.NewGuid(),
-            name!,
-            "Description",
-            CreateVariants("1")));
+    public void CreateProduct_NameInvalid(string? name) => Assert.Throws<ArgumentException>(() => Product.Create(
+        name!,
+        "Description",
+        new HashSet<ProductVariant>
+        {
+            new ProductVariant(
+                "Variant",
+                new Price(100, CurrencyCode.Usd),
+                null,
+                "SKU-001")
+        }));
 
     [Theory]
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
     public void CreateProduct_DescriptionInvalid(string? description)
-        => Assert.Throws<ArgumentException>(() => new Product(
-            Guid.NewGuid(),
+        => Assert.Throws<ArgumentException>(() => Product.Create(
             "Product",
             description!,
-            CreateVariants("1")));
+            new HashSet<ProductVariant>
+            {
+                new ProductVariant(
+                    "Variant",
+                    new Price(100, CurrencyCode.Usd),
+                    null,
+                    "SKU-001")
+            }));
 
     [Fact]
     public void CreateProduct_VariantsIsNull()
-        => Assert.Throws<ArgumentNullException>(() => new Product(
-            Guid.NewGuid(),
-            "Name",
+        => Assert.Throws<ArgumentNullException>(() => Product.Create(
+            "Product",
             "Description",
             null!));
 
     [Fact]
-    public void reateProduct_VariantsIsEmpty()
-        => Assert.Throws<ArgumentOutOfRangeException>(() => new Product(
-            Guid.NewGuid(),
+    public void CreateProduct_VariantsIsEmpty()
+        => Assert.Throws<ArgumentOutOfRangeException>(() => Product.Create(
             "Name",
             "Description",
             new HashSet<ProductVariant>()));
-
-    #endregion
-
-    #region UpdateProductRegion
 
     [Fact]
     public void Update_ArgumentsValid()
@@ -79,25 +79,35 @@ public sealed class ProductTests
             Guid.NewGuid(),
             "Old name",
             "Old description",
-            CreateVariants("1"));
+            new HashSet<ProductVariant>
+            {
+                new ProductVariant(
+                    "Variant1",
+                    new Price(100, CurrencyCode.Usd),
+                    null,
+                    "SKU-001")
+            });
 
-        var newVariants = CreateVariants("2");
+        var newVariants = new ProductVariant(
+            "Variant2",
+            new Price(100, CurrencyCode.Usd),
+            null,
+            "SKU-002");
         var newName = "New name";
         var newDescription = "New description";
 
-        product.Update(newName, newDescription, newVariants);
+        product.Update(newName, newDescription, new HashSet<ProductVariant> { newVariants });
 
         var actualName = product.Name;
         var actualDescription = product.Description;
-        var actualVariants = product._variants;
 
         var expectedName = "New name";
         var expectedDescription = "New description";
-        var expectedVariants = CreateVariants("2");
+        var expectedVariants = newVariants;
 
         Assert.Equal(actualName, expectedName);
         Assert.Equal(actualDescription, expectedDescription);
-        // Сравнить варианты
+        Assert.True(product.Variants.Contains(expectedVariants));
     }
 
     [Fact]
@@ -105,15 +115,20 @@ public sealed class ProductTests
     {
         var product = new Product(
             Guid.NewGuid(),
-            "Name",
-            "Description",
-            CreateVariants("1"));
+            "Old name",
+            "Old description",
+            new HashSet<ProductVariant>
+            {
+                new ProductVariant(
+                    "Variant1",
+                    new Price(100, CurrencyCode.Usd),
+                    null,
+                    "SKU-001")
+            });
 
         Assert.Throws<ArgumentOutOfRangeException>(() => product.Update(
             "New name",
             "New description",
             new HashSet<ProductVariant>()));
     }
-
-    #endregion
 }
