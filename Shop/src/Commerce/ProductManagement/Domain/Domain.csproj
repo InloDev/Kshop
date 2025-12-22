@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>KShop.Commerce.ProductManagement.Domain</RootNamespace>
+    <AssemblyName>KShop.Commerce.ProductManagement.Domain</AssemblyName>
+  </PropertyGroup>
+
+</Project>
