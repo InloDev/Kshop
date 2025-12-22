@@ -8,7 +8,11 @@ public sealed class Product
     public string Description { get; private set; }
     public IReadOnlySet<ProductVariant> Variants => _variants;
 
-    public Product(Guid id, string productName, string description, IReadOnlySet<ProductVariant> variants)
+    public Product(
+        Guid id,
+        string productName,
+        string description,
+        IReadOnlySet<ProductVariant> variants)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(productName);
         ArgumentException.ThrowIfNullOrWhiteSpace(description);

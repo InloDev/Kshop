@@ -1,9 +1,12 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 
+[SuppressMessage("ReSharper", "InconsistentNaming")]
 public enum CurrencyCode
 {
-    Usd = 1,
-    Eur = 2,
-    Rub = 3,
-    Mdl = 4
+    USD = 1,
+    EUR = 2,
+    RUB = 3,
+    MDL = 4
 }

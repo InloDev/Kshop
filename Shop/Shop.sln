@@ -6,6 +6,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SulutionFiles", "SulutionFi
 		.editorconfig = .editorconfig
 		Shop.sln.DotSettings = Shop.sln.DotSettings
 		..\.gitignore = ..\.gitignore
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commerce", "Commerce", "{ABC6217F-A86F-4C8F-B5EB-9567F9D5A23B}"
