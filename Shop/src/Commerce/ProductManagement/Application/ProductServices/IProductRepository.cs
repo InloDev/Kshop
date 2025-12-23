@@ -1,6 +1,6 @@
 using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 
-namespace KShop.Commerce.ProductManagement.Application;
+namespace KShop.Commerce.ProductManagement.Application.ProductServices;
 
 public interface IProductRepository
 {

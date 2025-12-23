@@ -1,4 +1,4 @@
-namespace KShop.Commerce.ProductManagement.Application;
+namespace KShop.Commerce.ProductManagement.Application.ProductServices;
 
 public class RemoveProductCommandHandler
 {
