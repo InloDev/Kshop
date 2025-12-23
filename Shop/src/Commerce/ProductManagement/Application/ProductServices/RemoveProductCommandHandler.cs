@@ -1,6 +1,6 @@
 namespace KShop.Commerce.ProductManagement.Application.ProductServices;
 
-public class RemoveProductCommandHandler
+public sealed class RemoveProductCommandHandler
 {
     private readonly IProductRepository _productRepository;
 
