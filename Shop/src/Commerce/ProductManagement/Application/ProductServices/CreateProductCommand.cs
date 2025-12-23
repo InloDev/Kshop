@@ -1,10 +1,8 @@
 using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 
-namespace KShop.Commerce.ProductManagement.Application;
+namespace KShop.Commerce.ProductManagement.Application.ProductServices;
 
-public sealed record UpdateProductCommand(
-    Guid ProductId,
+public sealed record CreateProductCommand(
     string ProductName,
     string Description,
-    Price Price,
     IReadOnlySet<ProductVariant> Variants);

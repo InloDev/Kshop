@@ -7,6 +7,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj"/>
+    <Compile Update="ProductServices\CreateProductCommandHandler.cs">
+      <DependentUpon>CreateProductCommand.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ProductServices\RemoveProductCommandHandler.cs">
+      <DependentUpon>RemoveProductCommand.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ProductServices\UpdateProductCommandHandler.cs">
+      <DependentUpon>UpdateProductCommand.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>
