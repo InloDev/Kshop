@@ -4,14 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace KShop.Commerce.ProductManagement.Infrastructure;
 
-public sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
+internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
 {
     public void Configure(EntityTypeBuilder<Product> productBuilder)
     {
         ArgumentNullException.ThrowIfNull(productBuilder);
 
         productBuilder.HasKey(product => product.Id);
-
         productBuilder.Property(product => product.Id).ValueGeneratedNever();
 
         productBuilder.Property(product => product.Name)
@@ -27,7 +26,8 @@ public sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
             {
                 variantBuilder.WithOwner().HasForeignKey("ProductId");
 
-                variantBuilder.HasKey("ProductId", nameof(ProductVariant.Sku));
+                variantBuilder.Property("Id").ValueGeneratedOnAdd();
+                variantBuilder.HasKey("Id");
 
                 variantBuilder.Property(variant => variant.Sku)
                     .IsRequired()
@@ -49,7 +49,7 @@ public sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
                             .HasMaxLength(3);
                     });
 
-                variantBuilder.OwnsOne<Discount>("Discount",
+                variantBuilder.OwnsOne<Discount>(variant => variant.Discount,
                     discountBuilder =>
                     {
                         discountBuilder.Property(discount => discount.Amount);
