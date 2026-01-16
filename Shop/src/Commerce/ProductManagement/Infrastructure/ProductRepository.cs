@@ -1,9 +1,10 @@
 using KShop.Commerce.ProductManagement.Application.ProductServices;
 using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
+using Microsoft.EntityFrameworkCore;
 
 namespace KShop.Commerce.ProductManagement.Infrastructure;
 
-public sealed class ProductRepository : IProductRepository
+internal sealed class ProductRepository : IProductRepository
 {
     private readonly ProductDbContext _dbContext;
 
@@ -14,17 +15,10 @@ public sealed class ProductRepository : IProductRepository
         _dbContext = context;
     }
 
-    public async Task SaveAsync(Product product, CancellationToken cancellationToken)
+    public async Task CreateAsync(Product product, CancellationToken cancellationToken)
     {
         await _dbContext.AddAsync(product, cancellationToken);
         await _dbContext.SaveChangesAsync(cancellationToken);
-    }
-
-    public async Task<Product> GetAsync(Guid id, CancellationToken cancellationToken)
-    {
-        var product = await _dbContext.FindAsync<Product>(id, cancellationToken);
-        ArgumentNullException.ThrowIfNull(product);
-        return product;
     }
 
     public async Task UpdateAsync(Product product, CancellationToken cancellationToken)
@@ -33,9 +27,12 @@ public sealed class ProductRepository : IProductRepository
         await _dbContext.SaveChangesAsync(cancellationToken);
     }
 
-    public Task RemoveAsync(Product product, CancellationToken cancellationToken)
+    public async Task<Product> GetAsync(Guid id, CancellationToken cancellationToken)
+        => await _dbContext.Set<Product>().SingleAsync(product => product.Id == id, cancellationToken);
+
+    public async Task RemoveAsync(Product product, CancellationToken cancellationToken)
     {
-        _dbContext.Remove(product);
-        return _dbContext.SaveChangesAsync(cancellationToken);
+        product.Remove();
+        await _dbContext.SaveChangesAsync(cancellationToken);
     }
 }
