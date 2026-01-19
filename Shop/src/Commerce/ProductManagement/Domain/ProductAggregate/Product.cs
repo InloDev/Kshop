@@ -3,7 +3,7 @@
 public sealed class Product
 {
     private HashSet<ProductVariant> _variants;
-    public Guid Id { get; private set; }
+    public Guid Id { get; }
     public ProductName Name { get; private set; }
     public ProductDescription Description { get; private set; }
     public IReadOnlySet<ProductVariant> Variants => _variants;
