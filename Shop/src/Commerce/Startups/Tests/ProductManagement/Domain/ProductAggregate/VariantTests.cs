@@ -8,13 +8,13 @@ public sealed class VariantTests
     public void Create_ValidArguments_Success()
     {
         var variant = new ProductVariant(
-            "Variant",
+            new VariantName("Variant"),
             new Price(100M, CurrencyCode.USD),
             null,
-            "SKU-001");
+            new VariantSku("SKU-001"));
 
-        Assert.Equal("Variant", variant.Name);
-        Assert.Equal("SKU-001", variant.Sku);
+        Assert.Equal("Variant", variant.Name.ToString());
+        Assert.Equal("SKU-001", variant.Sku.ToString());
     }
 
     [Theory]
@@ -22,22 +22,14 @@ public sealed class VariantTests
     [InlineData("")]
     [InlineData("   ")]
     public void Create_InvalidName_ThrowsArgumentException(string? name)
-        => Assert.Throws<ArgumentException>(() =>
-            new ProductVariant(
-                name!,
-                new Price(100M, CurrencyCode.USD),
-                null,
-                "SKU-001"));
+        => Assert.ThrowsAny<ArgumentException>(() =>
+            new VariantName(name!));
 
     [Theory]
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
     public void Create_InvalidSku_ThrowsArgumentException(string? sku)
-        => Assert.Throws<ArgumentException>(() =>
-            new ProductVariant(
-                "Variant",
-                new Price(100M, CurrencyCode.USD),
-                null,
-                sku!));
+        => Assert.ThrowsAny<ArgumentException>(() =>
+            new VariantSku(sku!));
 }
