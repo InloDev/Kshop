@@ -1,7 +1,6 @@
 using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KShop.Commerce.ProductManagement.Infrastructure;
 
@@ -68,16 +67,4 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
         );
     }
 
-    internal sealed class ProductNameConverter()
-        : ValueConverter<ProductName, string>(name => name.Value, dbValue => new ProductName(dbValue));
-
-    internal sealed class ProductDescriptionConverter()
-        : ValueConverter<ProductDescription, string>(description => description.Value,
-            dbValue => new ProductDescription(dbValue));
-
-    internal sealed class ProductVariantNameConverter()
-        : ValueConverter<VariantName, string>(name => name.Value, dbValue => new VariantName(dbValue));
-
-    internal sealed class ProductVariantSkuConverter()
-        : ValueConverter<VariantSku, string>(sku => sku.Value, dbValue => new VariantSku(dbValue));
 }

@@ -15,4 +15,19 @@
     <ProjectReference Include="..\Application\Application.csproj"/>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="ProductDescriptionConverter.cs">
+      <DependentUpon>ProductConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ProductNameConverter.cs">
+      <DependentUpon>ProductConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ProductVariantNameConverter.cs">
+      <DependentUpon>ProductConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ProductVariantSkuConverter.cs">
+      <DependentUpon>ProductConfiguration.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>
