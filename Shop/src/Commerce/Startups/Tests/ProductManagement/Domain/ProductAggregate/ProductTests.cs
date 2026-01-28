@@ -10,6 +10,7 @@ public sealed class ProductTests
         var productName = new ProductName("Product");
         var description = new ProductDescription("Description");
         var variant = new ProductVariant(
+            Guid.Empty,
             new VariantName("Variant"),
             new Price(100M, CurrencyCode.USD),
             null,
@@ -64,6 +65,7 @@ public sealed class ProductTests
             new HashSet<ProductVariant>
             {
                 new(
+                    Guid.Empty,
                     new VariantName("Variant1"),
                     new Price(100M, CurrencyCode.USD),
                     null,
@@ -72,6 +74,7 @@ public sealed class ProductTests
         );
 
         var newVariant = new ProductVariant(
+            Guid.Empty,
             new VariantName("Variant2"),
             new Price(100M, CurrencyCode.USD),
             null,
@@ -99,6 +102,7 @@ public sealed class ProductTests
             new HashSet<ProductVariant>
             {
                 new(
+                    Guid.Empty,
                     new VariantName("Variant1"),
                     new Price(100M, CurrencyCode.USD),
                     null,

@@ -8,6 +8,7 @@ public sealed class VariantTests
     public void Create_ValidArguments_Success()
     {
         var variant = new ProductVariant(
+            Guid.Empty,
             new VariantName("Variant"),
             new Price(100M, CurrencyCode.USD),
             null,
