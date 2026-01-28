@@ -7,8 +7,6 @@ public sealed record ProductVariant
     public VariantName Name { get; private set; }
     public Price Price { get; private set; }
     public Discount? Discount { get; private set; }
-    private ProductVariant() { }
-#nullable enable
 
     public ProductVariant(
         Guid id,
@@ -25,4 +23,8 @@ public sealed record ProductVariant
         Discount = discount;
         Sku = sku;
     }
+
+    #nullable disable
+    private ProductVariant() {}
+    #nullable enable
 }
