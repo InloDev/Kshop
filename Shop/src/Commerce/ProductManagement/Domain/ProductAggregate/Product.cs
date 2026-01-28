@@ -10,6 +10,13 @@ public sealed class Product
 
     public bool IsDeleted { get; private set; }
 
+    private Product()
+    {
+        Name = null!;
+        Description = null!;
+        _variants = new HashSet<ProductVariant>();
+    }
+
     public Product(
         Guid id,
         ProductName productName,
