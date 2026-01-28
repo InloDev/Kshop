@@ -24,14 +24,16 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
             .IsRequired()
             .HasMaxLength(ProductDescription.MaxLenght);
 
+        productBuilder.Ignore(p => p.Variants);
+
         productBuilder.OwnsMany<ProductVariant>("_variants",
             variantBuilder =>
             {
                 variantBuilder.ToTable("variants");
                 variantBuilder.WithOwner().HasForeignKey("ProductId");
 
-                variantBuilder.Property("id").ValueGeneratedOnAdd();
-                variantBuilder.HasKey("id");
+                variantBuilder.Property<Guid>("Id").ValueGeneratedOnAdd();
+                variantBuilder.HasKey("Id");
 
                 variantBuilder.Property(variant => variant.Sku)
                     .HasConversion<ProductVariantSkuConverter>()
@@ -65,6 +67,7 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
                     });
             }
         );
+        productBuilder.Metadata.FindNavigation("_variants")!.SetPropertyAccessMode(PropertyAccessMode.Field);
     }
 
 }
