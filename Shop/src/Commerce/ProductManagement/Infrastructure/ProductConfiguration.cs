@@ -24,7 +24,7 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
             .IsRequired()
             .HasMaxLength(ProductDescription.MaxLenght);
 
-        productBuilder.Ignore(p => p.Variants);
+        productBuilder.Ignore(product => product.Variants);
 
         productBuilder.OwnsMany<ProductVariant>("_variants",
             variantBuilder =>
@@ -67,7 +67,6 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
                     });
             }
         );
-        productBuilder.Metadata.FindNavigation("_variants")!.SetPropertyAccessMode(PropertyAccessMode.Field);
     }
 
 }
