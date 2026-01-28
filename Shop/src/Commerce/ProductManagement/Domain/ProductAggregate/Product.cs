@@ -9,14 +9,12 @@ public sealed class Product
     public IReadOnlySet<ProductVariant> Variants => _variants;
 
     public bool IsDeleted { get; private set; }
-
+#nullable disable
     private Product()
     {
-        Name = null!;
-        Description = null!;
         _variants = new HashSet<ProductVariant>();
     }
-
+#nullable enable
     public Product(
         Guid id,
         ProductName productName,
