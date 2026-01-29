@@ -68,5 +68,4 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
             }
         );
     }
-
 }

@@ -9,12 +9,6 @@ public sealed class Product
     public IReadOnlySet<ProductVariant> Variants => _variants;
 
     public bool IsDeleted { get; private set; }
-#nullable disable
-    private Product()
-    {
-        _variants = new HashSet<ProductVariant>();
-    }
-#nullable enable
     public Product(
         Guid id,
         ProductName productName,
@@ -31,6 +25,12 @@ public sealed class Product
         Description = description;
         _variants = variants.ToHashSet();
     }
+#nullable disable
+    private Product()
+    {
+        _variants = new HashSet<ProductVariant>();
+    }
+#nullable enable
 
     public static Product Create(
         ProductName productName,
