@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KShop.Commerce.ProductManagement.Infrastructure;
 
-internal sealed class ProductRepository : IProductRepository
+public sealed class ProductRepository : IProductRepository
 {
     private readonly ProductDbContext _dbContext;
 
@@ -32,6 +32,7 @@ internal sealed class ProductRepository : IProductRepository
 
     public async Task RemoveAsync(Product product, CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(product);
         product.Remove();
         await _dbContext.SaveChangesAsync(cancellationToken);
     }
