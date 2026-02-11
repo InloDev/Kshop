@@ -24,6 +24,8 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
             .IsRequired()
             .HasMaxLength(ProductDescription.MaxLenght);
 
+        productBuilder.Property(product => product.IsDeleted);
+
         productBuilder.Ignore(product => product.Variants);
 
         productBuilder.OwnsMany<ProductVariant>("_variants",
