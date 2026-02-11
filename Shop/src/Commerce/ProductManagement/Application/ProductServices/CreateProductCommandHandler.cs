@@ -17,10 +17,19 @@ public sealed class CreateProductCommandHandler
     {
         ArgumentNullException.ThrowIfNull(command);
 
+        var variants = command.Variants.Select(variant =>
+            new ProductVariant(
+                Guid.NewGuid(),
+                new VariantName(variant.Name),
+                new Price(variant.PriceAmount, Enum.Parse<CurrencyCode>(variant.CurrencyCode)),
+                variant.DiscountAmount is null
+                    ? null: new Discount(variant.DiscountAmount.Value, Enum.Parse<DiscountType>(variant.DiscountType!)),
+                new VariantSku(variant.Sku))).ToHashSet();
+
         var product = Product.Create(
             command.ProductName,
             command.Description,
-            command.Variants);
+            variants);
 
         await _productRepository.CreateAsync(product, cancellationToken);
     }
