@@ -24,7 +24,7 @@ public sealed record ProductVariant
         Sku = sku;
     }
 
-    #nullable disable
-    private ProductVariant() {}
-    #nullable enable
+#nullable disable
+    private ProductVariant() { }
+#nullable enable
 }
