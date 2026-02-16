@@ -11,6 +11,6 @@ public sealed record CreateProductVariantCommand(
     string Sku,
     string Name,
     decimal PriceAmount,
-    string CurrencyCode,
+    int CurrencyCode,
     decimal? DiscountAmount,
-    string? DiscountType);
+    int? DiscountType);
