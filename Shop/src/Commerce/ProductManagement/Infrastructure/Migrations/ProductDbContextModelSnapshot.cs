@@ -17,7 +17,7 @@ namespace KShop.Commerce.ProductManagement.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.2")
+                .HasAnnotation("ProductVersion", "10.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -89,7 +89,7 @@ namespace KShop.Commerce.ProductManagement.Infrastructure.Migrations
 
                                     b2.HasKey("ProductVariantId");
 
-                                    b2.ToTable("variants");
+                                    b2.ToTable("variants", (string)null);
 
                                     b2.WithOwner()
                                         .HasForeignKey("ProductVariantId");
@@ -110,7 +110,7 @@ namespace KShop.Commerce.ProductManagement.Infrastructure.Migrations
 
                                     b2.HasKey("ProductVariantId");
 
-                                    b2.ToTable("variants");
+                                    b2.ToTable("variants", (string)null);
 
                                     b2.WithOwner()
                                         .HasForeignKey("ProductVariantId");
