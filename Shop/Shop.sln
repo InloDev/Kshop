@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\Commerce
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Commerce\ProductManagement\Infrastructure\Infrastructure.csproj", "{8DFBA9FF-6840-40C8-A7A0-D485569D15B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCoreHub", "src\Commerce\ProductManagement\EFCoreHub\EFCoreHub.csproj", "{501BDD06-A902-46BF-8FC0-EA213100288E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartUpAPI", "src\Commerce\ProductManagement\StartUpAPI\StartUpAPI.csproj", "{501BDD06-A902-46BF-8FC0-EA213100288E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
