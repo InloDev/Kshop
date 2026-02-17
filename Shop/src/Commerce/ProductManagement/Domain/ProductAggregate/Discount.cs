@@ -8,7 +8,7 @@ public sealed record Discount
     public Discount(decimal amount, DiscountType discountType)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(amount);
-        if (DiscountType == DiscountType.Percentage)
+        if (discountType == DiscountType.Percentage)
         {
             ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(amount, 100);
         }

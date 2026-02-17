@@ -16,6 +16,7 @@ public sealed class RemoveProductCommandHandler
         ArgumentNullException.ThrowIfNull(command);
 
         var product = await _productRepository.GetAsync(command.ProductId, cancellationToken);
+        product.Remove();
         await _productRepository.RemoveAsync(product, cancellationToken);
     }
 }

@@ -7,13 +7,14 @@ public sealed class ProductTests
     [Fact]
     public void Create_ValidArguments_ReturnsProduct()
     {
-        const string productName = "Product";
-        const string description = "Description";
+        var productName = new ProductName("Product");
+        var description = new ProductDescription("Description");
         var variant = new ProductVariant(
-            "Variant",
+            Guid.Empty,
+            new VariantName("Variant"),
             new Price(100M, CurrencyCode.USD),
             null,
-            "SKU-001");
+            new VariantSku("SKU-001"));
 
         var product = Product.Create(
             productName,
@@ -30,48 +31,28 @@ public sealed class ProductTests
     [InlineData("")]
     [InlineData("   ")]
     public void Create_InvalidName_ThrowsArgumentException(string? name)
-        => Assert.Throws<ArgumentException>(()
-            => Product.Create(
-                name!,
-                "Description",
-                new HashSet<ProductVariant>
-                {
-                    new(
-                        "Variant",
-                        new Price(100M, CurrencyCode.USD),
-                        null,
-                        "SKU-001")
-                }));
+        => Assert.ThrowsAny<ArgumentException>(()
+            => new ProductName(name!));
 
     [Theory]
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
     public void Create_InvalidDescription_ThrowsArgumentException(string? description)
-        => Assert.Throws<ArgumentException>(() => Product.Create(
-            "Product",
-            description!,
-            new HashSet<ProductVariant>
-            {
-                new(
-                    "Variant",
-                    new Price(100M, CurrencyCode.USD),
-                    null,
-                    "SKU-001")
-            }));
+        => Assert.ThrowsAny<ArgumentException>(() => new ProductDescription(description!));
 
     [Fact]
     public void Create_NullVariants_ThrowsArgumentNullException()
         => Assert.Throws<ArgumentNullException>(() => Product.Create(
-            "Product",
-            "Description",
+            new ProductName("Product"),
+            new ProductDescription("Description"),
             null!));
 
     [Fact]
     public void Create_EmptyVariants_ThrowsArgumentOutOfRangeException()
         => Assert.Throws<ArgumentOutOfRangeException>(() => Product.Create(
-            "Name",
-            "Description",
+            new ProductName("Product"),
+            new ProductDescription("Description"),
             new HashSet<ProductVariant>()));
 
     [Fact]
@@ -79,30 +60,35 @@ public sealed class ProductTests
     {
         var product = new Product(
             Guid.NewGuid(),
-            "Old name",
-            "Old description",
+            new ProductName("Old name"),
+            new ProductDescription("Old description"),
             new HashSet<ProductVariant>
             {
                 new(
-                    "Variant1",
+                    Guid.Empty,
+                    new VariantName("Variant1"),
                     new Price(100M, CurrencyCode.USD),
                     null,
-                    "SKU-001")
-            });
+                    new VariantSku("SKU-001"))
+            }
+        );
 
         var newVariant = new ProductVariant(
-            "Variant2",
+            Guid.Empty,
+            new VariantName("Variant2"),
             new Price(100M, CurrencyCode.USD),
             null,
-            "SKU-002");
+            new VariantSku("SKU-002"));
 
         const string newName = "New name";
         const string newDescription = "New description";
 
-        product.Update(newName, newDescription, new HashSet<ProductVariant> { newVariant });
+        product.Update(new ProductName(newName),
+            new ProductDescription(newDescription),
+            new HashSet<ProductVariant> { newVariant });
 
-        Assert.Equal(newName, product.Name);
-        Assert.Equal(newDescription, product.Description);
+        Assert.Equal(newName, product.Name.Value);
+        Assert.Equal(newDescription, product.Description.Value);
         Assert.Equal(newVariant, product.Variants.Single());
     }
 
@@ -111,20 +97,22 @@ public sealed class ProductTests
     {
         var product = new Product(
             Guid.NewGuid(),
-            "Old name",
-            "Old description",
+            new ProductName("Old name"),
+            new ProductDescription("Old description"),
             new HashSet<ProductVariant>
             {
                 new(
-                    "Variant1",
+                    Guid.Empty,
+                    new VariantName("Variant1"),
                     new Price(100M, CurrencyCode.USD),
                     null,
-                    "SKU-001")
-            });
+                    new VariantSku("SKU-001"))
+            }
+        );
 
         Assert.Throws<ArgumentOutOfRangeException>(() => product.Update(
-            "New name",
-            "New description",
+            new ProductName("New name"),
+            new ProductDescription("New description"),
             new HashSet<ProductVariant>()));
     }
 }

@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>KShop.Commerce.ProductManagement.Infrastructure</RootNamespace>
+    <AssemblyName>KShop.Commerce.ProductManagement.Infrastructure</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.3"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="10.0.3"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="10.0.3"/>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0"/>
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ProductDescriptionConverter.cs">
+      <DependentUpon>ProductConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ProductNameConverter.cs">
+      <DependentUpon>ProductConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ProductVariantNameConverter.cs">
+      <DependentUpon>ProductConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ProductVariantSkuConverter.cs">
+      <DependentUpon>ProductConfiguration.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>
