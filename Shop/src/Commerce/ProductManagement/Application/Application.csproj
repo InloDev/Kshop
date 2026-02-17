@@ -7,15 +7,28 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj"/>
-    <Compile Update="ProductServices\CreateProductCommandHandler.cs">
-      <DependentUpon>CreateProductCommand.cs</DependentUpon>
-    </Compile>
-    <Compile Update="ProductServices\RemoveProductCommandHandler.cs">
-      <DependentUpon>RemoveProductCommand.cs</DependentUpon>
-    </Compile>
-    <Compile Update="ProductServices\UpdateProductCommandHandler.cs">
-      <DependentUpon>UpdateProductCommand.cs</DependentUpon>
-    </Compile>
+    <Compile Update="ProductServices\CreateProductCommandHandler.cs"
+             DependentUpon="CreateProductCommand.cs"/>
+
+    <Compile Update="ProductServices\RemoveProductCommandHandler.cs"
+             DependentUpon="RemoveProductCommand.cs"/>
+
+    <Compile Update="ProductServices\UpdateProductCommandHandler.cs"
+             DependentUpon="UpdateProductCommand.cs"/>
+
+    <Compile Update="Queries\ProductVariantDto.cs"
+             DependentUpon="ProductDetailsDto.cs"/>
+
+    <Compile Update="Queries\DiscountDto.cs"
+             DependentUpon="ProductVariantDto.cs"/>
+
+    <Compile Update="Queries\PriceDto.cs"
+             DependentUpon="ProductVariantDto.cs"/>
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.0.0"/>
   </ItemGroup>
 
 </Project>
