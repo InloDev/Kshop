@@ -3,14 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KShop.Commerce.ProductManagement.Infrastructure;
 
-public sealed class ProductDbContext : DbContext
+public sealed class ProductDbContext(DbContextOptions<ProductDbContext> options) : DbContext(options)
 {
-    public DbSet<Product> Products { get; set; } = null!;
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         ArgumentNullException.ThrowIfNull(modelBuilder);
 
+        modelBuilder.Entity<Product>().HasQueryFilter(product => !product.IsDeleted);
         modelBuilder.ApplyConfigurationsFromAssembly(
             typeof(ProductDbContext).Assembly);
 

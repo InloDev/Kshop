@@ -6,17 +6,17 @@
 
 - **Запрещено** использовать однобуквенные переменные или аргументы
 - В лямбда-выражениях используйте осмысленные имена вместо `x`, `p`, `i` и т.д.
-  - ❌ `products.Where(p => p.Price > 100)`
-  - ✅ `products.Where(product => product.Price > 100)`
-  - ✅ `products.Where(item => item.Price > 100)`
+    - ❌ `products.Where(p => p.Price > 100)`
+    - ✅ `products.Where(product => product.Price > 100)`
+    - ✅ `products.Where(item => item.Price > 100)`
 
 ### Работа с decimal
 
 - Всегда используйте суффикс `M` для decimal литералов
-  - ❌ `decimal price = 100;`
-  - ❌ `decimal price = 100.0;`
-  - ✅ `decimal price = 100M;`
-  - ✅ `new Price(100M, CurrencyCode.USD)`
+    - ❌ `decimal price = 100;`
+    - ❌ `decimal price = 100.0;`
+    - ✅ `decimal price = 100M;`
+    - ✅ `new Price(100M, CurrencyCode.USD)`
 
 ## Соглашения по тестированию
 

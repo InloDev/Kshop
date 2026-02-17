@@ -4,40 +4,50 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace KShop.Commerce.ProductManagement.Infrastructure;
 
-public sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
+internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
 {
     public void Configure(EntityTypeBuilder<Product> productBuilder)
     {
         ArgumentNullException.ThrowIfNull(productBuilder);
 
+        productBuilder.ToTable("products");
         productBuilder.HasKey(product => product.Id);
-
         productBuilder.Property(product => product.Id).ValueGeneratedNever();
 
         productBuilder.Property(product => product.Name)
+            .HasConversion<ProductNameConverter>()
             .IsRequired()
-            .HasMaxLength(200);
+            .HasMaxLength(ProductName.MaxLenght);
 
         productBuilder.Property(product => product.Description)
+            .HasConversion<ProductDescriptionConverter>()
             .IsRequired()
-            .HasMaxLength(1000);
+            .HasMaxLength(ProductDescription.MaxLenght);
+
+        productBuilder.Property(product => product.IsDeleted);
+
+        productBuilder.Ignore(product => product.Variants);
 
         productBuilder.OwnsMany<ProductVariant>("_variants",
             variantBuilder =>
             {
+                variantBuilder.ToTable("variants");
                 variantBuilder.WithOwner().HasForeignKey("ProductId");
 
-                variantBuilder.HasKey("ProductId", nameof(ProductVariant.Sku));
+                variantBuilder.Property<Guid>("Id").ValueGeneratedOnAdd();
+                variantBuilder.HasKey("Id");
 
                 variantBuilder.Property(variant => variant.Sku)
+                    .HasConversion<ProductVariantSkuConverter>()
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(VariantSku.MaxLenght);
 
                 variantBuilder.Property(variant => variant.Name)
+                    .HasConversion<ProductVariantNameConverter>()
                     .IsRequired()
-                    .HasMaxLength(200);
+                    .HasMaxLength(VariantName.MaxLenght);
 
-                variantBuilder.OwnsOne<Price>("Price",
+                variantBuilder.OwnsOne<Price>(variant => variant.Price,
                     priceBuilder =>
                     {
                         priceBuilder.Property(price => price.Amount)
@@ -45,17 +55,15 @@ public sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
 
                         priceBuilder.Property(price => price.Currency)
                             .IsRequired()
-                            .HasConversion<string>()
-                            .HasMaxLength(3);
+                            ;
                     });
 
-                variantBuilder.OwnsOne<Discount>("Discount",
+                variantBuilder.OwnsOne<Discount>(variant => variant.Discount,
                     discountBuilder =>
                     {
                         discountBuilder.Property(discount => discount.Amount);
 
-                        discountBuilder.Property(discount => discount.DiscountType)
-                            .HasConversion<string>();
+                        discountBuilder.Property(discount => discount.DiscountType);
                     });
             }
         );

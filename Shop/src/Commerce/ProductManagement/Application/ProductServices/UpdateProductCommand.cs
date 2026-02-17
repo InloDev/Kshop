@@ -4,7 +4,6 @@ namespace KShop.Commerce.ProductManagement.Application.ProductServices;
 
 public sealed record UpdateProductCommand(
     Guid ProductId,
-    string ProductName,
-    string Description,
-    Price Price,
+    ProductName ProductName,
+    ProductDescription Description,
     IReadOnlySet<ProductVariant> Variants);

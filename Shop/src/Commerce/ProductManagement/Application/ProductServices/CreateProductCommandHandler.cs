@@ -21,7 +21,6 @@ public sealed class CreateProductCommandHandler
             command.ProductName,
             command.Description,
             command.Variants);
-
-        await _productRepository.SaveAsync(product, cancellationToken);
+        await _productRepository.CreateAsync(product, cancellationToken);
     }
 }
