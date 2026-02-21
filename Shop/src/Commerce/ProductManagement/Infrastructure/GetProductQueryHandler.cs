@@ -1,20 +1,17 @@
 using KShop.Commerce.ProductManagement.Application.Queries;
 using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace KShop.Commerce.ProductManagement.Infrastructure;
 
 public sealed class GetProductQueryHandler(ProductDbContext context)
-    : IRequestHandler<GetProductQuery, ProductDetailsDto>
-{
-    public async Task<ProductDetailsDto> Handle(GetProductQuery request, CancellationToken cancellationToken)
-    {
-        ArgumentNullException.ThrowIfNull(request);
 
+{
+    public async Task<ProductDetailsDto> GetProductAsync(Guid productId, CancellationToken cancellationToken)
+    {
         var product = await context.Set<Product>()
             .AsNoTracking()
-            .Where(product => product.Id == request.ProductId)
+            .Where(product => product.Id == productId)
             .Select(product => new ProductDetailsDto(
                     Id: product.Id,
                     Name: product.Name.Value,
@@ -33,17 +30,10 @@ public sealed class GetProductQueryHandler(ProductDbContext context)
                         .ToHashSet()
                 )
             )
-            .FirstOrDefaultAsync(cancellationToken);
-        if(product is null)
+            .SingleAsync(cancellationToken);
+        if (product is null)
         {
-            throw new KeyNotFoundException($"Product with ID {request.ProductId} was not found.");
-        }
-
-        if(product.Variants.Any(variant=> variant.Price == null!))
-        {
-            throw new InvalidOperationException(
-                $"Product {product.Id} has one or more variants without a required Price."
-            );
+            throw new KeyNotFoundException($"Product with ID {productId} was not found.");
         }
 
         return product;
