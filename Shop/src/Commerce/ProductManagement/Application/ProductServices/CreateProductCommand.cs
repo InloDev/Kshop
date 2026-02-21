@@ -6,5 +6,3 @@ public sealed record CreateProductCommand(
     ProductName ProductName,
     ProductDescription Description,
     IReadOnlySet<ProductVariant> Variants);
-
-
