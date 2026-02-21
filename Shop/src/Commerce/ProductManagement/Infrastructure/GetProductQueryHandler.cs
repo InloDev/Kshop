@@ -31,11 +31,6 @@ public sealed class GetProductQueryHandler(ProductDbContext context)
                 )
             )
             .SingleAsync(cancellationToken);
-        if (product is null)
-        {
-            throw new KeyNotFoundException($"Product with ID {productId} was not found.");
-        }
-
         return product;
     }
 }
