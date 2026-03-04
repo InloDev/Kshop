@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KShop.Commerce.ProductManagement.Infrastructure.QueryHandlers;
 
-public sealed class HandleAsync(ProductDbContext dbContext)
+public sealed class GetProductsQueryHandler(ProductDbContext dbContext)
 {
-    public IAsyncEnumerable<ProductListItemDto> AsyncProductsHandler(
+    public IAsyncEnumerable<ProductListItemDto> HandleAsync(
         GetProductsQuery query,
         CancellationToken cancellationToken)
     {
