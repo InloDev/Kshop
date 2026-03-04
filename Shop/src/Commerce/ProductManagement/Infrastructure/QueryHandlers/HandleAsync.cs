@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KShop.Commerce.ProductManagement.Infrastructure.QueryHandlers;
 
-public sealed class GetProductsQueryHandler(ProductDbContext dbContext)
+public sealed class HandleAsync(ProductDbContext dbContext)
 {
     public IAsyncEnumerable<ProductListItemDto> AsyncProductsHandler(
         GetProductsQuery query,
@@ -20,13 +20,12 @@ public sealed class GetProductsQueryHandler(ProductDbContext dbContext)
                 product.Id > query.AfterId);
         }
 
-        var products = productsQuery
+        return productsQuery
             .OrderBy(product => product.Id)
             .Take(query.PageSize)
             .Select(product => new ProductListItemDto(product.Id,
                 product.Name.Value,
                 product.Description.Value))
             .AsAsyncEnumerable();
-        return products;
     }
 }

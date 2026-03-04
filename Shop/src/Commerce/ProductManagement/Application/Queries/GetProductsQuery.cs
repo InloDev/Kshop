@@ -13,11 +13,6 @@ public sealed record GetProductsQuery
         ArgumentOutOfRangeException.ThrowIfLessThan(PageSize, MinPageSize);
         ArgumentOutOfRangeException.ThrowIfGreaterThan(PageSize, MaxPageSize);
 
-        if (AfterId == Guid.Empty)
-        {
-            throw new ArgumentException("Cursor cannot be Guid.Empty", nameof(AfterId));
-        }
-
         PageSize = pageSize;
         AfterId = afterId;
     }
