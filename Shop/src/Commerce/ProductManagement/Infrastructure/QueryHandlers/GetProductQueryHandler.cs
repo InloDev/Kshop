@@ -2,7 +2,7 @@ using KShop.Commerce.ProductManagement.Application.Queries;
 using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 using Microsoft.EntityFrameworkCore;
 
-namespace KShop.Commerce.ProductManagement.Infrastructure;
+namespace KShop.Commerce.ProductManagement.Infrastructure.QueryHandlers;
 
 public sealed class GetProductQueryHandler(ProductDbContext context)
 
