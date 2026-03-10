@@ -1,11 +1,10 @@
-using KShop.Commerce.ProductManagement.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+using KShop.Commerce.ProductManagement.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<ProductDbContext>(options => options.UseNpgsql(connectionString));
+builder.Services.AddProductManagement(connectionString!);
 
 builder.Services.AddControllers();
 
