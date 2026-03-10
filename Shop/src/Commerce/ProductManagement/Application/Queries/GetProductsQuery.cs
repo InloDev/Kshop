@@ -10,8 +10,8 @@ public sealed record GetProductsQuery
 
     public GetProductsQuery(int pageSize, Guid? afterId)
     {
-        ArgumentOutOfRangeException.ThrowIfLessThan(PageSize, MinPageSize);
-        ArgumentOutOfRangeException.ThrowIfGreaterThan(PageSize, MaxPageSize);
+        ArgumentOutOfRangeException.ThrowIfLessThan(pageSize, MinPageSize);
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(pageSize, MaxPageSize);
 
         PageSize = pageSize;
         AfterId = afterId;
