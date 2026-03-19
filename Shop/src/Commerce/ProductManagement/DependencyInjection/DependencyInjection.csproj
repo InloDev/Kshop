@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <RootNamespace>KShop.Commerce.ProductManagement.DependencyInjection</RootNamespace>
+    <AssemblyName>KShop.Commerce.ProductManagement.DependencyInjection</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
