@@ -14,8 +14,8 @@ public sealed class VariantTests
             null,
             new VariantSku("SKU-001"));
 
-        Assert.Equal("Variant", variant.Name.ToString());
-        Assert.Equal("SKU-001", variant.Sku.ToString());
+        Assert.Equal("Variant", variant.Name.Value);
+        Assert.Equal("SKU-001", variant.Sku.Value);
     }
 
     [Theory]
