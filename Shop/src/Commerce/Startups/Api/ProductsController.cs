@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using KShop.Commerce.ProductManagement.Application.ProductServices;
 using KShop.Commerce.ProductManagement.Application.Queries;
 using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
@@ -9,20 +10,17 @@ namespace KShop.Commerce.Startups.Api;
 
 [ApiController]
 [Route("api/products")]
-public sealed class ProductsController(
-    CreateProductCommandHandler createProductCommandHandler,
-    UpdateProductCommandHandler updateProductCommandHandler,
-    RemoveProductCommandHandler removeProductCommandHandler,
-    GetProductQueryHandler getProductQueryHandler,
-    GetProductsQueryHandler getProductsQueryHandler)
+public sealed class ProductsController
     : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> CreateProductAsync(
+        CreateProductCommandHandler createProductCommandHandler,
         [FromBody] CreateProductRequest request,
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
+        ArgumentNullException.ThrowIfNull(createProductCommandHandler);
 
         var command = new CreateProductCommand(
             new ProductName(request.Name),
@@ -31,16 +29,18 @@ public sealed class ProductsController(
 
         await createProductCommandHandler.HandleAsync(command, cancellationToken);
 
-        return NoContent();
+        return StatusCode(StatusCodes.Status201Created);
     }
 
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> UpdateProductAsync(
+        UpdateProductCommandHandler updateProductCommandHandler,
         [FromRoute] Guid id,
         [FromBody] UpdateProductRequest request,
         CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
+        ArgumentNullException.ThrowIfNull(updateProductCommandHandler);
 
         var command = new UpdateProductCommand(
             id,
@@ -55,9 +55,12 @@ public sealed class ProductsController(
 
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> RemoveProductAsync(
+        RemoveProductCommandHandler removeProductCommandHandler,
         [FromRoute] Guid id,
         CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(removeProductCommandHandler);
+
         await removeProductCommandHandler.HandleAsync(new RemoveProductCommand(id), cancellationToken);
 
         return NoContent();
@@ -65,31 +68,34 @@ public sealed class ProductsController(
 
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<ProductDetailsDto>> GetProductAsync(
+        GetProductQueryHandler getProductQueryHandler,
         [FromRoute] Guid id,
         CancellationToken cancellationToken)
     {
+        ArgumentNullException.ThrowIfNull(getProductQueryHandler);
+
+
         var product = await getProductQueryHandler.GetProductAsync(id, cancellationToken);
 
         return Ok(product);
     }
 
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyCollection<ProductListItemDto>>> GetProductsAsync(
+    public async IAsyncEnumerable<ProductListItemDto>  GetProductsAsync(
+        GetProductsQueryHandler getProductsQueryHandler,
         [FromQuery] GetProductsRequest request,
-        CancellationToken cancellationToken)
+        [EnumeratorCancellation] CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(request);
+        ArgumentNullException.ThrowIfNull(getProductsQueryHandler);
 
         var query = new GetProductsQuery(request.PageSize, request.AfterId);
 
-        var products = new List<ProductListItemDto>();
         await foreach (var product in getProductsQueryHandler
                            .HandleAsync(query, cancellationToken))
         {
-            products.Add(product);
+            yield return product;
         }
-
-        return Ok(products);
     }
 
     private static IReadOnlySet<ProductVariant> MapVariants(IReadOnlyCollection<ProductVariantRequest> variants)
