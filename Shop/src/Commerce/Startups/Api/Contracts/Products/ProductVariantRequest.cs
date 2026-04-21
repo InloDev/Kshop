@@ -3,20 +3,18 @@ using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 
 namespace KShop.Commerce.Startups.Api.Contracts.Products;
 
-public sealed class ProductVariantRequest
-{
-    public Guid Id { get; init; }
+public sealed record ProductVariantRequest(
+    Guid Id,
 
-    [Required]
-    [MaxLength(VariantName.MaxLenght)]
-    public string Name { get; init; } = string.Empty;
+    [property: Required]
+    [property: MaxLength(VariantName.MaxLenght)]
+    string Name,
 
-    [Required]
-    public required PriceRequest Price { get; init; }
+    [property: Required] PriceRequest Price,
 
-    public DiscountRequest? Discount { get; init; }
+    DiscountRequest? Discount,
 
-    [Required]
-    [MaxLength(VariantSku.MaxLenght)]
-    public string Sku { get; init; } = string.Empty;
-}
+    [property: Required]
+    [property: MaxLength(VariantSku.MaxLenght)]
+    string Sku
+);

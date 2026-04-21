@@ -3,17 +3,16 @@ using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 
 namespace KShop.Commerce.Startups.Api.Contracts.Products;
 
-public sealed class CreateProductRequest
-{
-    [Required]
-    [MaxLength(ProductName.MaxLenght)]
-    public string Name { get; init; } = string.Empty;
+public sealed record CreateProductRequest (
+    [property: Required]
+    [property: MaxLength(ProductName.MaxLenght)]
+    string Name,
 
-    [Required]
-    [MaxLength(ProductDescription.MaxLenght)]
-    public string Description { get; init; } = string.Empty;
+    [property: Required]
+    [property: MaxLength(ProductDescription.MaxLenght)]
+    string Description,
 
-    [Required]
-    [MinLength(1)]
-    public IReadOnlyCollection<ProductVariantRequest> Variants { get; init; } = Array.Empty<ProductVariantRequest>();
-}
+    [property: Required]
+    [property: MinLength(1)]
+    IReadOnlyCollection<ProductVariantRequest> Variants
+);
