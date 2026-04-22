@@ -15,7 +15,7 @@ public sealed class ProductsController
 {
     [HttpPost]
     public async Task<IActionResult> CreateProductAsync(
-        CreateProductCommandHandler createProductCommandHandler,
+        [FromServices] CreateProductCommandHandler createProductCommandHandler,
         [FromBody] CreateProductRequest request,
         CancellationToken cancellationToken)
     {
@@ -34,7 +34,7 @@ public sealed class ProductsController
 
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> UpdateProductAsync(
-        UpdateProductCommandHandler updateProductCommandHandler,
+        [FromServices] UpdateProductCommandHandler updateProductCommandHandler,
         [FromRoute] Guid id,
         [FromBody] UpdateProductRequest request,
         CancellationToken cancellationToken)
@@ -55,7 +55,7 @@ public sealed class ProductsController
 
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> RemoveProductAsync(
-        RemoveProductCommandHandler removeProductCommandHandler,
+        [FromServices] RemoveProductCommandHandler removeProductCommandHandler,
         [FromRoute] Guid id,
         CancellationToken cancellationToken)
     {
@@ -68,7 +68,7 @@ public sealed class ProductsController
 
     [HttpGet("{id:guid}")]
     public async Task<ActionResult<ProductDetailsDto>> GetProductAsync(
-        GetProductQueryHandler getProductQueryHandler,
+        [FromServices] GetProductQueryHandler getProductQueryHandler,
         [FromRoute] Guid id,
         CancellationToken cancellationToken)
     {
@@ -82,7 +82,7 @@ public sealed class ProductsController
 
     [HttpGet]
     public async IAsyncEnumerable<ProductListItemDto>  GetProductsAsync(
-        GetProductsQueryHandler getProductsQueryHandler,
+        [FromServices] GetProductsQueryHandler getProductsQueryHandler,
         [FromQuery] GetProductsRequest request,
         [EnumeratorCancellation] CancellationToken cancellationToken)
     {

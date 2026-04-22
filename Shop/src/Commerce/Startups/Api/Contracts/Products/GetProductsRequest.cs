@@ -3,10 +3,10 @@ using KShop.Commerce.ProductManagement.Application.Queries;
 
 namespace KShop.Commerce.Startups.Api.Contracts.Products;
 
-public sealed class GetProductsRequest
-{
-    [Range(GetProductsQuery.MinPageSize, GetProductsQuery.MaxPageSize)]
-    public int PageSize { get; init; } = GetProductsQuery.MinPageSize;
+public sealed record GetProductsRequest(
 
-    public Guid? AfterId { get; init; }
-}
+    [property: Range(GetProductsQuery.MinPageSize, GetProductsQuery.MaxPageSize)]
+    int PageSize  = GetProductsQuery.MinPageSize,
+
+    Guid? AfterId = null
+);
