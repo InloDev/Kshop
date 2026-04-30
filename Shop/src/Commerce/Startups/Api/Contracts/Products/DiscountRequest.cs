@@ -3,11 +3,11 @@ using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 
 namespace KShop.Commerce.Startups.Api.Contracts.Products;
 
-public sealed record DiscountRequest(
+public sealed record DiscountRequest
+{
+    [Range(0.01, double.MaxValue)]
+    public decimal Amount { get; init; }
 
-    [property: Range(0.01,double.MaxValue )]
-    decimal Amount,
-
-    [property: EnumDataType(typeof(DiscountType))]
-    DiscountType DiscountType
-);
+    [EnumDataType(typeof(DiscountType))]
+    public DiscountType DiscountType { get; init; }
+}

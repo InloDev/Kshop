@@ -3,11 +3,12 @@ using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 
 namespace KShop.Commerce.Startups.Api.Contracts.Products;
 
-public sealed record PriceRequest(
-    [property: Required]
-    [property: Range(0.01, double.MaxValue)]
-    decimal Amount,
+public sealed record PriceRequest
+{
+    [Required]
+    [Range(0.01, double.MaxValue)]
+    public decimal Amount { get; init; }
 
-    [property: EnumDataType(typeof(CurrencyCode))]
-    CurrencyCode Currency
-);
+    [EnumDataType(typeof(CurrencyCode))]
+    public CurrencyCode Currency { get; init; }
+}
