@@ -74,14 +74,13 @@ public sealed class ProductsController
     {
         ArgumentNullException.ThrowIfNull(getProductQueryHandler);
 
-
         var product = await getProductQueryHandler.GetProductAsync(id, cancellationToken);
 
         return Ok(product);
     }
 
     [HttpGet]
-    public async IAsyncEnumerable<ProductListItemDto>  GetProductsAsync(
+    public async IAsyncEnumerable<ProductListItemDto> GetProductsAsync(
         [FromServices] GetProductsQueryHandler getProductsQueryHandler,
         [FromQuery] GetProductsRequest request,
         [EnumeratorCancellation] CancellationToken cancellationToken)

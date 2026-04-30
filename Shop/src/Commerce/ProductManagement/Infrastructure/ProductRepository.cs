@@ -8,7 +8,7 @@ public sealed class ProductRepository : IProductRepository
 {
     private readonly ProductDbContext _dbContext;
 
-    internal ProductRepository(ProductDbContext context)
+    public ProductRepository(ProductDbContext context)
     {
         ArgumentNullException.ThrowIfNull(context);
 
