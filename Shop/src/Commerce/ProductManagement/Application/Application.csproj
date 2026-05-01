@@ -16,15 +16,6 @@
     <Compile Update="ProductServices\UpdateProductCommandHandler.cs"
              DependentUpon="UpdateProductCommand.cs"/>
 
-    <Compile Update="Queries\ProductVariantDto.cs"
-             DependentUpon="ProductDetailsDto.cs"/>
-
-    <Compile Update="Queries\DiscountDto.cs"
-             DependentUpon="ProductVariantDto.cs"/>
-
-    <Compile Update="Queries\PriceDto.cs"
-             DependentUpon="ProductVariantDto.cs"/>
-
   </ItemGroup>
 
 </Project>

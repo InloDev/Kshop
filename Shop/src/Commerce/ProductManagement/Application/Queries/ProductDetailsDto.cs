@@ -1,3 +1,5 @@
+using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
+
 namespace KShop.Commerce.ProductManagement.Application.Queries;
 
 public sealed record ProductDetailsDto(
@@ -5,4 +7,4 @@ public sealed record ProductDetailsDto(
     string Name,
     string Description,
     bool IsDeleted,
-    IReadOnlySet<ProductVariantDto> Variants);
+    IReadOnlySet<ProductVariant> Variants);
