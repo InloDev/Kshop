@@ -9,7 +9,7 @@ internal sealed class DiscountConverter : JsonConverter<Discount>
     public override Discount Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var discountLoad = JsonSerializer.Deserialize<DiscountLoad>(ref reader, options)
-                      ?? throw new JsonException("Discount payload is required.");
+                           ?? throw new JsonException("Discount payload is required.");
 
         return new Discount(discountLoad.Amount, discountLoad.DiscountType);
     }

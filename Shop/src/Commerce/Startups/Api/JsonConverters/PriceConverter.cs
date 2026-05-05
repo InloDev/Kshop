@@ -9,7 +9,7 @@ internal sealed class PriceConverter : JsonConverter<Price>
     public override Price Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var priceLoad = JsonSerializer.Deserialize<PricePayload>(ref reader, options)
-                      ?? throw new JsonException("Price payload is required.");
+                        ?? throw new JsonException("Price payload is required.");
 
         return new Price(priceLoad.Amount, priceLoad.Currency);
     }
