@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using KShop.Commerce.ProductManagement.DependencyInjection;
+using KShop.Commerce.Startups.Api.JsonConverters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddControllers()
 
     {
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        options.JsonSerializerOptions.AddProductVariantConverters();
     })
     ;
 builder.Services.AddEndpointsApiExplorer();
