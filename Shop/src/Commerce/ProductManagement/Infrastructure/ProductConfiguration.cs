@@ -56,8 +56,7 @@ internal sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
                         priceBuilder.Property(price => price.Currency)
                             .IsRequired()
                             .HasConversion<string>()
-                            .HasMaxLength(3)
-                            ;
+                            .HasMaxLength(3);
                     });
 
                 variantBuilder.OwnsOne<Discount>(variant => variant.Discount,
