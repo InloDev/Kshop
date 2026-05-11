@@ -15,5 +15,5 @@ public sealed record CreateProductRequest
 
     [Required]
     [MinLength(1)]
-    public IReadOnlyCollection<ProductVariantRequest> Variants { get; init; } = Array.Empty<ProductVariantRequest>();
+    public required IReadOnlyCollection<ProductVariantRequest> Variants { get; init; }
 }
