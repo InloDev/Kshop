@@ -1,15 +1,10 @@
-using KShop.Commerce.ProductManagement.DependencyInjection;
+using KShop.Commerce.Startups.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-builder.Services.AddProductManagement(connectionString!);
-
-builder.Services.AddControllers();
+builder.Services.AddApiServices(builder.Configuration, builder.Environment);
 
 var app = builder.Build();
-
-app.MapControllers();
+app.UseApiPipeline();
 
 app.Run();
