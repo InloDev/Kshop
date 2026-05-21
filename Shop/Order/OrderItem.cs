@@ -42,7 +42,6 @@ public sealed class OrderItem
         {
             DiscountType.FixedAmount => totalPrice - Discount.Amount,
             DiscountType.Percentage => totalPrice - totalPrice * Discount.Amount / 100m,
-            _ => throw new InvalidOperationException($"Unknown discount type: {Discount.DiscountType}")
         };
 
         return discountedPrice;
