@@ -18,6 +18,7 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Order\Order.csproj" />
     <ProjectReference Include="..\..\ProductManagement\Domain\Domain.csproj"/>
   </ItemGroup>
 

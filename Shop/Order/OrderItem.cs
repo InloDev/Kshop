@@ -9,14 +9,14 @@ public sealed class OrderItem
     public ProductName ProductName { get; private set; }
     public int Quantity { get; private set; }
     public Price UnitPrice { get; private set; }
-    public Discount Discount { get; private set; }
+    public Discount? Discount { get; private set; }
 
     public OrderItem(
         Guid productId,
         ProductName productName,
         int quantity,
         Price unitPrice,
-        Discount discount)
+        Discount? discount)
     {
         ArgumentNullException.ThrowIfNull(productName);
         ArgumentNullException.ThrowIfNull(unitPrice);
@@ -38,10 +38,16 @@ public sealed class OrderItem
     {
         var totalPrice = UnitPrice.Amount * Quantity;
 
+        if (Discount is null)
+        {
+            return totalPrice;
+        }
+
         var discountedPrice = Discount.DiscountType switch
         {
             DiscountType.FixedAmount => totalPrice - Discount.Amount,
             DiscountType.Percentage => totalPrice - totalPrice * Discount.Amount / 100m,
+            _ => throw new ArgumentOutOfRangeException()
         };
 
         return discountedPrice;
