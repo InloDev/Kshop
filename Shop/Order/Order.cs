@@ -3,12 +3,13 @@ namespace KShop.Commerce.OrderManagement;
 public sealed class Order
 {
     private HashSet<OrderItem> _orderItems;
+
     public Guid Id { get; private set; }
     public Guid UserId { get; private set; }
     public OrderStatus Status { get; private set; }
-    public IReadOnlySet<OrderItem> OrderItems => _orderItems;
     public DateTime CreatedAt { get; private set; }
     public decimal TotalAmount { get; private set; }
+    public IReadOnlySet<OrderItem> OrderItems => _orderItems;
 
     private Order(
         Guid id,
@@ -64,6 +65,24 @@ public sealed class Order
 
     public void Complete() => TransitionTo(OrderStatus.Completed);
 
+    private static void ValidateUniqueProducts(IEnumerable<OrderItem> orderItems)
+    {
+        var duplicatedProductId = orderItems
+            .GroupBy(item => item.ProductId)
+            .FirstOrDefault(group => group.Count() > 1)
+            ?
+            .Key;
+
+        if (duplicatedProductId is not null)
+        {
+            throw new InvalidOperationException(
+                $"Product '{duplicatedProductId}' appears more than once in order items.");
+        }
+    }
+
+    private static decimal CalculateOrderTotalAmount(IEnumerable<OrderItem> orderItems)
+        => orderItems.Sum(item => item.CalculateTotalPrice());
+
     private void TransitionTo(OrderStatus nextStatus)
     {
         if (!Status.CanTransitionTo(nextStatus))
@@ -73,20 +92,4 @@ public sealed class Order
 
         Status = nextStatus;
     }
-
-    private static void ValidateUniqueProducts(IEnumerable<OrderItem> orderItems)
-    {
-        var duplicatedProductId = orderItems
-            .GroupBy(item => item.ProductId)
-            .FirstOrDefault(group => group.Count() > 1)?
-            .Key;
-
-        if (duplicatedProductId is not null)
-        {
-            throw new InvalidOperationException($"Product '{duplicatedProductId}' appears more than once in order items.");
-        }
-    }
-
-    private static decimal CalculateOrderTotalAmount(IEnumerable<OrderItem> orderItems)
-        => orderItems.Sum(item => item.CalculateTotalPrice());
 }

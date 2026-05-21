@@ -11,7 +11,12 @@ public sealed class OrderItem
     public Price UnitPrice { get; private set; }
     public Discount Discount { get; private set; }
 
-    public OrderItem(Guid productId, ProductName productName, int quantity, Price unitPrice, Discount discount)
+    public OrderItem(
+        Guid productId,
+        ProductName productName,
+        int quantity,
+        Price unitPrice,
+        Discount discount)
     {
         ArgumentNullException.ThrowIfNull(productName);
         ArgumentNullException.ThrowIfNull(unitPrice);
@@ -36,7 +41,7 @@ public sealed class OrderItem
         var discountedPrice = Discount.DiscountType switch
         {
             DiscountType.FixedAmount => totalPrice - Discount.Amount,
-            DiscountType.Percentage => totalPrice - (totalPrice * Discount.Amount / 100m),
+            DiscountType.Percentage => totalPrice - totalPrice * Discount.Amount / 100m,
             _ => throw new InvalidOperationException($"Unknown discount type: {Discount.DiscountType}")
         };
 
