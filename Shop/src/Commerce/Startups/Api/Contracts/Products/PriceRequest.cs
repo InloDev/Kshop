@@ -7,7 +7,7 @@ public sealed record PriceRequest
 {
     [Required]
     [Range(0.01, double.MaxValue)]
-    public decimal Amount { get; init; }
+    public required decimal Amount { get; init; }
 
     [EnumDataType(typeof(CurrencyCode))]
     public CurrencyCode Currency { get; init; }

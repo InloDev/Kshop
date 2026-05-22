@@ -9,7 +9,7 @@ public sealed record ProductVariantRequest
 
     [Required]
     [MaxLength(VariantName.MaxLenght)]
-    public string Name { get; init; } = string.Empty;
+    public required string Name { get; init; }
 
     [Required]
     public required PriceRequest Price { get; init; }
@@ -18,5 +18,5 @@ public sealed record ProductVariantRequest
 
     [Required]
     [MaxLength(VariantSku.MaxLenght)]
-    public string Sku { get; init; } = string.Empty;
+    public required string Sku { get; init; }
 }
