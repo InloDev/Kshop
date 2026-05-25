@@ -6,8 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ProductManagement\Domain\Domain.csproj"/>
     <Compile Update="OrderStatusExtensions.cs"
              DependentUpon="OrderStatus.cs"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SharedKernel\ProductAggregateVO\ProductAggregateVO.csproj" />
   </ItemGroup>
 </Project>

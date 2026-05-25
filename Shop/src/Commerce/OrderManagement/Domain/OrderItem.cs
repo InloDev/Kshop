@@ -1,3 +1,5 @@
+﻿using KShop.Commerce.SharedKernel.ProductAggregateVO;
+
 namespace KShop.Commerce.OrderManagement.Domain;
 
 public sealed class OrderItem
@@ -7,28 +9,26 @@ public sealed class OrderItem
     public string ProductName { get; private set; }
     public int Quantity { get; }
     public decimal UnitPrice { get; }
-    public decimal Discount { get; }
-    public OrderItemDiscountType? DiscountType { get; }
+    public Discount? Discount { get; }
 
     private OrderItem(
+        Guid id,
         Guid productId,
         string productName,
         int quantity,
         decimal unitPrice,
-        decimal discount,
-        OrderItemDiscountType? discountType)
+        Discount? discount)
     {
         ArgumentNullException.ThrowIfNull(productName);
-        ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(unitPrice, 0);
+        ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(unitPrice,0);
         ArgumentOutOfRangeException.ThrowIfLessThan(quantity, 1);
 
-        Id = Guid.NewGuid();
+        Id = id;
         ProductId = productId;
         ProductName = productName;
         Quantity = quantity;
         UnitPrice = unitPrice;
         Discount = discount;
-        DiscountType = discountType;
     }
 
     public static OrderItem Create(
@@ -36,53 +36,22 @@ public sealed class OrderItem
         string productName,
         int quantity,
         decimal unitPrice,
-        decimal? discountAmount = null,
-        OrderItemDiscountType? discountType = null)
-    {
-        var discount = CalculateDiscount(unitPrice, discountAmount, discountType);
-        return new OrderItem(productId, productName, quantity, unitPrice, discount, discountType);
-    }
+        Discount? discount)
+        => new OrderItem(Guid.NewGuid(), productId, productName, quantity, unitPrice, discount);
 
 #nullable disable
     private OrderItem() { }
 #nullable enable
 
-    public decimal CalculateTotalPrice() => (UnitPrice - Discount) * Quantity;
-
-    private static decimal CalculateDiscount(
-        decimal unitPrice,
-        decimal? discountAmount,
-        OrderItemDiscountType? discountType)
+    public decimal CalculateTotalPrice()
     {
-        if (discountAmount is null && discountType is null)
+        var totalPrice = UnitPrice * Quantity;
+        return Discount?.DiscountType switch
         {
-            return 0m;
-        }
-
-        if (discountAmount is null || discountType is null)
-        {
-            throw new ArgumentException("Discount amount and discount type should be provided together.");
-        }
-
-        ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(discountAmount.Value, 0);
-
-        return discountType.Value switch
-        {
-            OrderItemDiscountType.FixedAmount => CalculateFixedAmountDiscount(unitPrice, discountAmount.Value),
-            OrderItemDiscountType.Percentage => CalculatePercentageDiscount(unitPrice, discountAmount.Value),
-            _ => throw new ArgumentOutOfRangeException(nameof(discountType), discountType, "Unsupported discount type.")
+            DiscountType.FixedAmount => totalPrice - Discount.Amount,
+            DiscountType.Percentage => totalPrice - totalPrice * Discount.Amount / 100m,
+            null => totalPrice,
+            _ => throw new ArgumentOutOfRangeException()
         };
-    }
-
-    private static decimal CalculateFixedAmountDiscount(decimal unitPrice, decimal discountAmount)
-    {
-        ArgumentOutOfRangeException.ThrowIfGreaterThan(discountAmount, unitPrice);
-        return discountAmount;
-    }
-
-    private static decimal CalculatePercentageDiscount(decimal unitPrice, decimal discountAmount)
-    {
-        ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(discountAmount, 100);
-        return unitPrice * discountAmount / 100m;
     }
 }
