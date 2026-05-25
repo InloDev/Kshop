@@ -46,6 +46,24 @@ public sealed class Order
         TotalAmount = CalculateOrderTotalAmount(_orderItems);
     }
 
+    public void AddOrderItem(OrderItem orderItem)
+    {
+        ArgumentNullException.ThrowIfNull(orderItem);
+
+        var existingItem = _orderItems.FirstOrDefault(i => i.ProductId == orderItem.ProductId);
+
+        if (existingItem is not null)
+        {
+            existingItem.AddQuantity(orderItem.Quantity);
+        }
+        else
+        {
+            _orderItems.Add(orderItem);
+        }
+
+        TotalAmount = CalculateOrderTotalAmount(_orderItems);
+    }
+
     public void Submit()
     {
         if (_orderItems.Any())

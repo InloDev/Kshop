@@ -7,7 +7,7 @@ public sealed class OrderItem
     public Guid Id { get; private set; }
     public Guid ProductId { get; private set; }
     public string ProductName { get; private set; }
-    public int Quantity { get; }
+    public int Quantity { get; private set; }
     public decimal UnitPrice { get; }
     public Discount? Discount { get; }
 
@@ -53,5 +53,11 @@ public sealed class OrderItem
             null => totalPrice,
             _ => throw new ArgumentOutOfRangeException()
         };
+    }
+
+    internal void AddQuantity(int quantity)
+    {
+        ArgumentOutOfRangeException.ThrowIfLessThan(quantity, 1);
+        Quantity += quantity;
     }
 }
