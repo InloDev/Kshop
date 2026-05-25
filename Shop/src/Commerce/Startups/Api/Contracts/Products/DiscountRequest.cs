@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
+using KShop.Commerce.SharedKernel.ProductAggregateVO;
 
 namespace KShop.Commerce.Startups.Api.Contracts.Products;
 

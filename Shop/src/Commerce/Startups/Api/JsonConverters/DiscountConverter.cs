@@ -1,6 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
+using KShop.Commerce.SharedKernel.ProductAggregateVO;
 
 namespace KShop.Commerce.Startups.Api.JsonConverters;
 

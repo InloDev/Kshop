@@ -2,7 +2,6 @@
 
 namespace KShop.Commerce.OrderManagement.Domain;
 
-[SuppressMessage("ReSharper", "InconsistentNaming")]
 public enum OrderStatus
 {
     Draft = 1,

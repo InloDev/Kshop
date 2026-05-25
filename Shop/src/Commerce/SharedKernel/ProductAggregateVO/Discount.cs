@@ -1,4 +1,4 @@
-﻿namespace KShop.Commerce.ProductManagement.Domain.ProductAggregate;
+namespace KShop.Commerce.SharedKernel.ProductAggregateVO;
 
 public sealed record Discount
 {
