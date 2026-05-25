@@ -15,7 +15,7 @@ public sealed class Order
         Guid id,
         Guid userId,
         OrderStatus status,
-        IReadOnlyCollection<OrderItem> orderItems,
+        IReadOnlySet<OrderItem> orderItems,
         DateTime createdAt)
     {
         ArgumentNullException.ThrowIfNull(orderItems);
@@ -34,10 +34,7 @@ public sealed class Order
     private Order() { }
 #nullable enable
 
-    public static Order Create(Guid userId)
-        => new(Guid.NewGuid(), userId, OrderStatus.Draft, [], DateTime.UtcNow);
-
-    public static Order Create(Guid userId, IReadOnlyCollection<OrderItem> orderItems)
+    public static Order Create(Guid userId, IReadOnlySet<OrderItem> orderItems)
         => new(Guid.NewGuid(), userId, OrderStatus.Draft, orderItems, DateTime.UtcNow);
 
     public void Update(IReadOnlyCollection<OrderItem> orderItems)
@@ -51,7 +48,7 @@ public sealed class Order
 
     public void Submit()
     {
-        if (_orderItems.Count == 0)
+        if (_orderItems.Any())
         {
             throw new InvalidOperationException("Cannot submit an empty order.");
         }
