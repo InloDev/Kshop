@@ -19,7 +19,7 @@ public sealed class OrderItem
         decimal unitPrice,
         Discount? discount)
     {
-        ArgumentNullException.ThrowIfNull(productName);
+        ArgumentException.ThrowIfNullOrWhiteSpace(productName);
         ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(unitPrice,0);
         ArgumentOutOfRangeException.ThrowIfLessThan(quantity, 1);
 
