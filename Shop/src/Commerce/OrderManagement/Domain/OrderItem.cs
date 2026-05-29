@@ -20,7 +20,7 @@ public sealed class OrderItem
         Discount? discount)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(productName);
-        ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(unitPrice,0);
+        ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(unitPrice, 0);
         ArgumentOutOfRangeException.ThrowIfLessThan(quantity, 1);
 
         Id = id;
@@ -31,6 +31,10 @@ public sealed class OrderItem
         Discount = discount;
     }
 
+#nullable disable
+    private OrderItem() { }
+#nullable enable
+
     public static OrderItem Create(
         Guid productId,
         string productName,
@@ -39,16 +43,12 @@ public sealed class OrderItem
         Discount? discount)
         => new OrderItem(Guid.NewGuid(), productId, productName, quantity, unitPrice, discount);
 
-#nullable disable
-    private OrderItem() { }
-#nullable enable
-
     public decimal CalculateTotalPrice()
     {
         var totalPrice = UnitPrice * Quantity;
         return Discount?.DiscountType switch
         {
-            DiscountType.FixedAmount => totalPrice - Discount.Amount,
+            DiscountType.FixedAmount => totalPrice - Discount.Amount * Quantity,
             DiscountType.Percentage => totalPrice - totalPrice * Discount.Amount / 100m,
             null => totalPrice,
             _ => throw new ArgumentOutOfRangeException()
@@ -59,5 +59,12 @@ public sealed class OrderItem
     {
         ArgumentOutOfRangeException.ThrowIfLessThan(quantity, 1);
         Quantity += quantity;
+    }
+
+    internal void ReduceQuantity(int quantity)
+    {
+        ArgumentOutOfRangeException.ThrowIfLessThan(quantity, 1);
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(quantity, Quantity);
+        Quantity -= quantity;
     }
 }

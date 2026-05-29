@@ -64,6 +64,28 @@ public sealed class Order
         TotalAmount = CalculateOrderTotalAmount(_orderItems);
     }
 
+    public void ReduceOrderItem(OrderItem orderItem)
+    {
+        ArgumentNullException.ThrowIfNull(orderItem);
+
+        var existingItem = _orderItems.FirstOrDefault(i => i.ProductId == orderItem.ProductId);
+        if (existingItem is null)
+        {
+            throw new InvalidOperationException("Order item not found.");
+        }
+
+        if (existingItem.Quantity == 1 || orderItem.Quantity >= existingItem.Quantity)
+        {
+            _orderItems.Remove(existingItem);
+        }
+        else
+        {
+            existingItem.ReduceQuantity(orderItem.Quantity);
+        }
+
+        TotalAmount = CalculateOrderTotalAmount(_orderItems);
+    }
+
     public void Submit()
     {
         if (_orderItems.Any())
