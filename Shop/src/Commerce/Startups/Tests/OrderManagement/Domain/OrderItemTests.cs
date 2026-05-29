@@ -1,5 +1,4 @@
 using KShop.Commerce.OrderManagement.Domain;
-using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 using KShop.Commerce.SharedKernel.ProductAggregateVO;
 
 namespace KShop.Commerce.Startups.Tests.OrderManagement.Domain;
@@ -29,14 +28,13 @@ public sealed class OrderItemTests
     [InlineData("")]
     [InlineData("   ")]
     public void Create_InvalidProductName_ThrowsArgumentException(string? productName)
-        => Assert.Throws<ArgumentException>(
-            () => OrderItem.Create(
-                Guid.Empty,
-                productName!,
-                10,
-                25.5m,
-                null)
-            );
+        => Assert.Throws<ArgumentException>(() => OrderItem.Create(
+            Guid.Empty,
+            productName!,
+            10,
+            25.5m,
+            null)
+        );
 
     [Theory]
     [InlineData(0)]
