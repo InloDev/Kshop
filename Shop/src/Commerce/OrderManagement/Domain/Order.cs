@@ -29,7 +29,7 @@ public sealed class Order
         CreatedAt = createdAt;
         TotalAmount = totalAmount;
         _orderItems = orderItems.ToHashSet();
-        TotalAmount = CalculateOrderTotalAmount(_orderItems);
+        TotalAmount = totalAmount;
     }
 
 #nullable disable
