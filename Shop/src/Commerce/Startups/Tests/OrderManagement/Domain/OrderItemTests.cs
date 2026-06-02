@@ -1,5 +1,4 @@
 using KShop.Commerce.OrderManagement.Domain;
-using KShop.Commerce.SharedKernel.ProductAggregateVO;
 
 namespace KShop.Commerce.Startups.Tests.OrderManagement.Domain;
 
@@ -13,18 +12,17 @@ public sealed class OrderItemTests
             "Test Product",
             10,
             25.5m,
-            new Discount(5, DiscountType.FixedAmount));
+            5);
 
         Assert.NotEqual(orderItem.Id, Guid.Empty);
         Assert.NotEqual(orderItem.ProductId, Guid.Empty);
         Assert.Equal("Test Product", orderItem.ProductName);
         Assert.Equal(10, orderItem.Quantity);
         Assert.Equal(25.5m, orderItem.UnitPrice);
-        Assert.Equal(new Discount(5, DiscountType.FixedAmount), orderItem.Discount);
+        Assert.Equal(5, orderItem.Discount);
     }
 
     [Theory]
-    [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
     public void Create_InvalidProductName_ThrowsArgumentException(string? productName)
@@ -33,7 +31,16 @@ public sealed class OrderItemTests
             productName!,
             10,
             25.5m,
-            null)
+            0)
+        );
+    [Fact]
+    public void Create_NullProductName_ThrowsArgumentException()
+        => Assert.Throws<ArgumentNullException>(() => OrderItem.Create(
+            Guid.Empty,
+            null!,
+            10,
+            25.5m,
+            0)
         );
 
     [Theory]
@@ -47,7 +54,7 @@ public sealed class OrderItemTests
                 "Test Product",
                 quantity,
                 25.5m,
-                null);
+                0);
         });
 
     [Theory]
@@ -61,6 +68,17 @@ public sealed class OrderItemTests
                 "Test Product",
                 10,
                 unitPrice,
-                null);
+                0);
+        });
+    [Fact]
+    public void Create_InvalidDiscount_ThrowsOutOfRangeException()
+        => Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            OrderItem.Create(
+                Guid.Empty,
+                "Test Product",
+                10,
+                25.5m,
+                -1);
         });
 }

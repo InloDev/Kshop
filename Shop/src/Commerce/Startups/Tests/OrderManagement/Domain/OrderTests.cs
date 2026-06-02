@@ -1,5 +1,4 @@
 using KShop.Commerce.OrderManagement.Domain;
-using KShop.Commerce.SharedKernel.ProductAggregateVO;
 
 namespace KShop.Commerce.Startups.Tests.OrderManagement.Domain;
 
@@ -12,7 +11,7 @@ public class OrderTests
             Guid.NewGuid(),
             new HashSet<OrderItem>());
 
-        Assert.Equal(OrderStatus.Draft, order.Status);
+        Assert.Equal(OrderStatus.Pending, order.Status);
         Assert.Empty(order.OrderItems);
     }
 
@@ -23,7 +22,7 @@ public class OrderTests
             Guid.NewGuid(),
             new HashSet<OrderItem> { CreateOrderItem() });
 
-        Assert.Equal(OrderStatus.Draft, order.Status);
+        Assert.Equal(OrderStatus.Pending, order.Status);
         Assert.NotEmpty(order.OrderItems);
     }
 
@@ -32,7 +31,7 @@ public class OrderTests
         "Test Product",
         10,
         25.5m,
-        new Discount(5, DiscountType.FixedAmount));
+        5);
 
     protected static Order CreateOrder() => Order.Create(
         Guid.NewGuid(),
