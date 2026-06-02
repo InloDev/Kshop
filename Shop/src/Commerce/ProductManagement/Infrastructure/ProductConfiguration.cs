@@ -1,5 +1,4 @@
 using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
-using KShop.Commerce.SharedKernel.ProductAggregateVO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

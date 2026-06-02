@@ -1,4 +1,4 @@
-namespace KShop.Commerce.SharedKernel.ProductAggregateVO;
+namespace KShop.Commerce.OrderManagement.Domain;
 
 public enum DiscountType
 {

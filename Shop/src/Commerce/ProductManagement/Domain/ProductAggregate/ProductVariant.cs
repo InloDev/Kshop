@@ -1,4 +1,3 @@
-using KShop.Commerce.SharedKernel.ProductAggregateVO;
 namespace KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 
 public sealed record ProductVariant
