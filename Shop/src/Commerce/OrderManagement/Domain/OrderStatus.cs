@@ -4,9 +4,8 @@ namespace KShop.Commerce.OrderManagement.Domain;
 
 public enum OrderStatus
 {
-    Draft = 1,
-    Pending = 2,
-    Confirmed = 3,
-    Shipped = 4,
-    Completed = 5
+    Pending = 1,
+    Confirmed = 2,
+    Shipped = 3,
+    Completed = 4
 }

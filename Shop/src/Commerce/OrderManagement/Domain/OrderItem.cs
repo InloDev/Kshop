@@ -1,15 +1,13 @@
-﻿using KShop.Commerce.SharedKernel.ProductAggregateVO;
-
-namespace KShop.Commerce.OrderManagement.Domain;
+﻿namespace KShop.Commerce.OrderManagement.Domain;
 
 public sealed class OrderItem
 {
     public Guid Id { get; private set; }
     public Guid ProductId { get; private set; }
     public string ProductName { get; private set; }
-    public int Quantity { get; private set; }
+    public int Quantity { get; }
     public decimal UnitPrice { get; }
-    public Discount? Discount { get; }
+    public decimal Discount { get; }
 
     private OrderItem(
         Guid id,
@@ -17,11 +15,12 @@ public sealed class OrderItem
         string productName,
         int quantity,
         decimal unitPrice,
-        Discount? discount)
+        decimal discount)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(productName);
         ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(unitPrice, 0);
         ArgumentOutOfRangeException.ThrowIfLessThan(quantity, 1);
+        ArgumentOutOfRangeException.ThrowIfLessThan(discount,0);
 
         Id = id;
         ProductId = productId;
@@ -40,31 +39,9 @@ public sealed class OrderItem
         string productName,
         int quantity,
         decimal unitPrice,
-        Discount? discount)
+        decimal discount)
         => new OrderItem(Guid.NewGuid(), productId, productName, quantity, unitPrice, discount);
 
     public decimal CalculateTotalPrice()
-    {
-        var totalPrice = UnitPrice * Quantity;
-        return Discount?.DiscountType switch
-        {
-            DiscountType.FixedAmount => totalPrice - Discount.Amount * Quantity,
-            DiscountType.Percentage => totalPrice - totalPrice * Discount.Amount / 100m,
-            null => totalPrice,
-            _ => throw new ArgumentOutOfRangeException()
-        };
-    }
-
-    internal void AddQuantity(int quantity)
-    {
-        ArgumentOutOfRangeException.ThrowIfLessThan(quantity, 1);
-        Quantity += quantity;
-    }
-
-    internal void ReduceQuantity(int quantity)
-    {
-        ArgumentOutOfRangeException.ThrowIfLessThan(quantity, 1);
-        ArgumentOutOfRangeException.ThrowIfGreaterThan(quantity, Quantity);
-        Quantity -= quantity;
-    }
+        => (UnitPrice - Discount) * Quantity;
 }

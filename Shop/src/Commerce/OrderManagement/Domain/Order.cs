@@ -15,8 +15,9 @@ public sealed class Order
         Guid id,
         Guid userId,
         OrderStatus status,
-        IReadOnlySet<OrderItem> orderItems,
-        DateTime createdAt)
+        DateTime createdAt,
+        decimal totalAmount,
+        IReadOnlySet<OrderItem> orderItems)
     {
         ArgumentNullException.ThrowIfNull(orderItems);
 
@@ -25,8 +26,9 @@ public sealed class Order
         Id = id;
         UserId = userId;
         Status = status;
-        _orderItems = orderItems.ToHashSet();
         CreatedAt = createdAt;
+        TotalAmount = totalAmount;
+        _orderItems = orderItems.ToHashSet();
         TotalAmount = CalculateOrderTotalAmount(_orderItems);
     }
 
@@ -35,66 +37,7 @@ public sealed class Order
 #nullable enable
 
     public static Order Create(Guid userId, IReadOnlySet<OrderItem> orderItems)
-        => new(Guid.NewGuid(), userId, OrderStatus.Draft, orderItems, DateTime.UtcNow);
-
-    public void Update(IReadOnlyCollection<OrderItem> orderItems)
-    {
-        ArgumentNullException.ThrowIfNull(orderItems);
-        ValidateUniqueProducts(orderItems);
-
-        _orderItems = orderItems.ToHashSet();
-        TotalAmount = CalculateOrderTotalAmount(_orderItems);
-    }
-
-    public void AddOrderItem(OrderItem orderItem)
-    {
-        ArgumentNullException.ThrowIfNull(orderItem);
-
-        var existingItem = _orderItems.FirstOrDefault(i => i.ProductId == orderItem.ProductId);
-
-        if (existingItem is not null)
-        {
-            existingItem.AddQuantity(orderItem.Quantity);
-        }
-        else
-        {
-            _orderItems.Add(orderItem);
-        }
-
-        TotalAmount = CalculateOrderTotalAmount(_orderItems);
-    }
-
-    public void ReduceOrderItem(OrderItem orderItem)
-    {
-        ArgumentNullException.ThrowIfNull(orderItem);
-
-        var existingItem = _orderItems.FirstOrDefault(i => i.ProductId == orderItem.ProductId);
-        if (existingItem is null)
-        {
-            throw new InvalidOperationException("Order item not found.");
-        }
-
-        if (existingItem.Quantity == 1 || orderItem.Quantity >= existingItem.Quantity)
-        {
-            _orderItems.Remove(existingItem);
-        }
-        else
-        {
-            existingItem.ReduceQuantity(orderItem.Quantity);
-        }
-
-        TotalAmount = CalculateOrderTotalAmount(_orderItems);
-    }
-
-    public void Submit()
-    {
-        if (_orderItems.Any())
-        {
-            throw new InvalidOperationException("Cannot submit an empty order.");
-        }
-
-        TransitionTo(OrderStatus.Pending);
-    }
+        => new(Guid.NewGuid(), userId, OrderStatus.Pending,DateTime.UtcNow, CalculateOrderTotalAmount(orderItems), orderItems);
 
     public void Confirm() => TransitionTo(OrderStatus.Confirmed);
 
@@ -105,7 +48,7 @@ public sealed class Order
     private static void ValidateUniqueProducts(IEnumerable<OrderItem> orderItems)
     {
         var duplicatedProductId = orderItems
-            .GroupBy(item => item.ProductId)
+            .GroupBy(item => new { item.ProductId})
             .FirstOrDefault(group => group.Count() > 1)
             ?
             .Key;
