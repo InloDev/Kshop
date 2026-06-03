@@ -1,4 +1,6 @@
-﻿namespace KShop.Commerce.ProductManagement.Domain.ProductAggregate;
+using KShop.Commerce.OrderManagement.Domain;
+
+namespace KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 
 public sealed record Discount
 {

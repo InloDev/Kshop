@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>KShop.Commerce.OrderManagement.Domain</RootNamespace>
+    <AssemblyName>KShop.Commerce.ProductManagement.Application</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="OrderStatusExtensions.cs"
+             DependentUpon="OrderStatus.cs"/>
+  </ItemGroup>
+</Project>

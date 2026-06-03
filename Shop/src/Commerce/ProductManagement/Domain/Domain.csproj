@@ -15,11 +15,11 @@
     <Compile Update="ProductAggregate\ProductVariant.cs">
       <DependentUpon>Product.cs</DependentUpon>
     </Compile>
-    <Compile Update="ProductAggregate\DiscountType.cs">
-      <DependentUpon>Discount.cs</DependentUpon>
-    </Compile>
     <Compile Update="ProductAggregate\CurrencyCode.cs">
       <DependentUpon>Price.cs</DependentUpon>
+    </Compile>
+    <Compile Update="ProductAggregate\DiscountType.cs">
+      <DependentUpon>Discount.cs</DependentUpon>
     </Compile>
     <Compile Update="ProductAggregate\VariantName.cs">
       <DependentUpon>ProductVariant.cs</DependentUpon>
