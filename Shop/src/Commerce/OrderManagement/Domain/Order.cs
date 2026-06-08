@@ -48,7 +48,7 @@ public sealed class Order
     private static void ValidateUniqueProducts(IEnumerable<OrderItem> orderItems)
     {
         var duplicatedProductId = orderItems
-            .GroupBy(item => new { item.ProductId})
+            .GroupBy(item => item.ProductId)
             .FirstOrDefault(group => group.Count() > 1)
             ?
             .Key;
