@@ -1,6 +1,6 @@
 using KShop.Commerce.OrderManagement.Domain;
 
-namespace KShop.Commerce.OrderManagement.Application;
+namespace KShop.Commerce.OrderManagement.Application.OrderServices;
 
 public interface IOrderRepository
 {
