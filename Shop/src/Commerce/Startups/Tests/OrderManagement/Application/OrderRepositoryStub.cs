@@ -1,4 +1,4 @@
-using KShop.Commerce.OrderManagement.Application;
+using KShop.Commerce.OrderManagement.Application.OrderServices;
 using KShop.Commerce.OrderManagement.Domain;
 
 namespace KShop.Commerce.Startups.Tests.OrderManagement.Application;
