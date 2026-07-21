@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-      <RootNamespace>KShop.Commerce.OrderManagement.Application</RootNamespace>
-      <AssemblyName>KShop.Commerce.OrderManagement.Application</AssemblyName>
-    </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>KShop.Commerce.OrderManagement.Application</RootNamespace>
+    <AssemblyName>KShop.Commerce.OrderManagement.Application</AssemblyName>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Domain\Domain.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj"/>
+  </ItemGroup>
 
 </Project>
