@@ -9,6 +9,11 @@ public sealed class CreateOrderCommandHandler(
     public async Task HandleAsync(CreateOrderCommand command, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(command);
+        ArgumentNullException.ThrowIfNull(command.Items);
+        if (command.Items.Count == 0)
+        {
+            throw new ArgumentException("Order must contain at least one item.", nameof(command.Items));
+        }
 
         var productIds = command.Items
             .Select(item => item.ProductId)
