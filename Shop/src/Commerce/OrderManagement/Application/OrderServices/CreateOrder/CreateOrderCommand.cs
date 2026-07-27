@@ -1,12 +1,24 @@
 namespace KShop.Commerce.OrderManagement.Application.OrderServices.CreateOrder;
 
-public sealed record CreateOrderCommand(
-    Guid UserId,
-    IReadOnlySet<CreateOrderItem> Items)
+public sealed record CreateOrderCommand
 {
-    public Guid UserId { get; } =
-        UserId != Guid.Empty ? UserId : throw new ArgumentException("User id cannot be empty");
+    public Guid UserId { get; init; }
+    public IReadOnlySet<CreateOrderItem> Items { get; init; }
 
-    public IReadOnlySet<CreateOrderItem> Items { get; } =
-        Items.Count < 0 ? Items : throw new ArgumentException("Order items cannot be empty");
+    public CreateOrderCommand(Guid userId, IReadOnlySet<CreateOrderItem> items)
+    {
+        UserId = userId;
+        Items = ValidateItems(items);
+    }
+
+    private static IReadOnlySet<CreateOrderItem> ValidateItems(IReadOnlySet<CreateOrderItem> items)
+    {
+        ArgumentNullException.ThrowIfNull(items);
+        if (items.Count == 0)
+        {
+            throw new ArgumentException("Order must contain at least one item.");
+        }
+
+        return items;
+    }
 }
