@@ -2,7 +2,7 @@
 
 public sealed class Order
 {
-    private HashSet<OrderItem> _orderItems;
+    private readonly HashSet<OrderItem> _orderItems;
 
     public Guid Id { get; private set; }
     public Guid UserId { get; private set; }
@@ -37,7 +37,12 @@ public sealed class Order
 #nullable enable
 
     public static Order Create(Guid userId, IReadOnlySet<OrderItem> orderItems)
-        => new(Guid.NewGuid(), userId, OrderStatus.Pending,DateTime.UtcNow, CalculateOrderTotalAmount(orderItems), orderItems);
+        => new(Guid.NewGuid(),
+            userId,
+            OrderStatus.Pending,
+            DateTime.UtcNow,
+            CalculateOrderTotalAmount(orderItems),
+            orderItems);
 
     public void Confirm() => TransitionTo(OrderStatus.Confirmed);
 
@@ -48,10 +53,9 @@ public sealed class Order
     private static void ValidateUniqueProducts(IEnumerable<OrderItem> orderItems)
     {
         var duplicatedProductId = orderItems
-            .GroupBy(item => new { item.ProductId})
+            .GroupBy(item => item.ProductId)
             .FirstOrDefault(group => group.Count() > 1)
-            ?
-            .Key;
+            ?.Key;
 
         if (duplicatedProductId is not null)
         {

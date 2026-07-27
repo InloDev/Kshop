@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <RootNamespace>KShop.Commerce.OrderManagement.Domain</RootNamespace>
-    <AssemblyName>KShop.Commerce.ProductManagement.Application</AssemblyName>
+    <AssemblyName>KShop.Commerce.OrderManagement.Domain</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
