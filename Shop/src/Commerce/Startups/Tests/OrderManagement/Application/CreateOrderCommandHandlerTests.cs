@@ -1,5 +1,4 @@
 using KShop.Commerce.OrderManagement.Application.OrderServices.CreateOrder;
-using KShop.Commerce.OrderManagement.Domain;
 
 namespace KShop.Commerce.Startups.Tests.OrderManagement.Application;
 
