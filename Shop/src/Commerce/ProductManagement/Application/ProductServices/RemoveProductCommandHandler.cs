@@ -17,6 +17,6 @@ public sealed class RemoveProductCommandHandler
 
         var product = await _productRepository.GetAsync(command.ProductId, cancellationToken);
         product.Remove();
-        await _productRepository.RemoveAsync(product, cancellationToken);
+        await _productRepository.UpdateAsync(product, cancellationToken);
     }
 }
