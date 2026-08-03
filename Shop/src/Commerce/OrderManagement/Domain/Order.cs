@@ -7,12 +7,11 @@ public sealed class Order
     public Guid Id { get; private set; }
     public Guid UserId { get; private set; }
     public OrderStatus Status { get; private set; }
-    public DateTime CreatedAt { get; private set; }
+    public DateTimeOffset CreatedAt { get; private set; }
     public decimal TotalAmount { get; private set; }
     public IReadOnlySet<OrderItem> OrderItems => _orderItems;
 
-    public bool IsDeleted { get; private set; }
-    public DateTime DateTimeOffset { get; private set; }
+    public DateTimeOffset DeletedAt { get; private set; }
 
     private Order(
         Guid id,
@@ -54,10 +53,7 @@ public sealed class Order
     public void Complete() => TransitionTo(OrderStatus.Completed);
 
     public void RemoveOrder()
-    {
-        IsDeleted = true;
-        DateTimeOffset = DateTime.UtcNow;
-    }
+        => DeletedAt = DateTime.UtcNow;
 
     private static void ValidateUniqueProducts(IEnumerable<OrderItem> orderItems)
     {
