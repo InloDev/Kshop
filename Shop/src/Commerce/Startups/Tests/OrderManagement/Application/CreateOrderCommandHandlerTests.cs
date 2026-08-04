@@ -37,7 +37,7 @@ public sealed class CreateOrderCommandHandlerTests
         await _handler.HandleAsync(command, cancellationToken);
 
         Assert.NotNull(_orderRepository.AddedOrder);
-        Assert.Equal(userId, _orderRepository.AddedOrder.UserId);
+        Assert.Equal(userId, _orderRepository.AddedOrder.CustomerId);
         Assert.Equal(2, _orderRepository.AddedOrder.OrderItems.Count);
         Assert.Equal((100 - 10) * 2 + (200 - 0) * 1, _orderRepository.AddedOrder.TotalAmount);
         Assert.Equal(cancellationToken, _orderRepository.CancellationToken);

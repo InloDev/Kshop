@@ -5,7 +5,7 @@ public sealed class Order
     private readonly HashSet<OrderItem> _orderItems;
 
     public Guid Id { get; private set; }
-    public Guid UserId { get; private set; }
+    public Guid CustomerId { get; private set; }
     public OrderStatus Status { get; private set; }
     public DateTimeOffset CreatedAt { get; private set; }
     public decimal TotalAmount { get; private set; }
@@ -15,7 +15,7 @@ public sealed class Order
 
     private Order(
         Guid id,
-        Guid userId,
+        Guid customerId,
         OrderStatus status,
         DateTime createdAt,
         decimal totalAmount,
@@ -26,7 +26,7 @@ public sealed class Order
         ValidateUniqueProducts(orderItems);
 
         Id = id;
-        UserId = userId;
+        CustomerId = customerId;
         Status = status;
         CreatedAt = createdAt;
         TotalAmount = totalAmount;

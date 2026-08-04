@@ -2,7 +2,7 @@ namespace KShop.Commerce.OrderManagement.Application.OrderQueries;
 
 public sealed record OrderDetailsDto(
     Guid OrderId,
-    Guid UserId,
+    Guid CustomerId,
     string OrderStatus,
     DateTimeOffset CreatedAt,
     decimal TotalAmount,
