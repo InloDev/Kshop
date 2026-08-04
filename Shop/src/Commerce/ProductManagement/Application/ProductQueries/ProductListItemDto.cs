@@ -1,4 +1,4 @@
-namespace KShop.Commerce.ProductManagement.Application.Queries;
+namespace KShop.Commerce.ProductManagement.Application.ProductQueries;
 
 public sealed record ProductListItemDto(
     Guid Id,

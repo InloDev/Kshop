@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
+using KShop.Commerce.ProductManagement.Application.ProductQueries;
 using KShop.Commerce.ProductManagement.Application.ProductServices;
-using KShop.Commerce.ProductManagement.Application.Queries;
 using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 using KShop.Commerce.ProductManagement.Infrastructure.QueryHandlers;
 using KShop.Commerce.Startups.Api.Contracts.Products;

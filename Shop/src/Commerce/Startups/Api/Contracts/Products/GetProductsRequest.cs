@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using KShop.Commerce.ProductManagement.Application.Queries;
+using KShop.Commerce.ProductManagement.Application.ProductQueries;
 
 namespace KShop.Commerce.Startups.Api.Contracts.Products;
 

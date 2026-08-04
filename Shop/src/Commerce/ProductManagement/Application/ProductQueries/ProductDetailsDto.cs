@@ -1,6 +1,6 @@
 using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 
-namespace KShop.Commerce.ProductManagement.Application.Queries;
+namespace KShop.Commerce.ProductManagement.Application.ProductQueries;
 
 public sealed record ProductDetailsDto(
     Guid Id,
