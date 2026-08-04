@@ -29,11 +29,4 @@ public sealed class ProductRepository : IProductRepository
 
     public async Task<Product> GetAsync(Guid id, CancellationToken cancellationToken)
         => await _dbContext.Set<Product>().SingleAsync(product => product.Id == id, cancellationToken);
-
-    public async Task RemoveAsync(Product product, CancellationToken cancellationToken)
-    {
-        ArgumentNullException.ThrowIfNull(product);
-        product.Remove();
-        await _dbContext.SaveChangesAsync(cancellationToken);
-    }
 }
