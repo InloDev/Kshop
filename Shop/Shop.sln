@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Commerce\Orde
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\Commerce\OrderManagement\Application\Application.csproj", "{98484420-80FC-4CB4-B04B-2455346516E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Commerce\OrderManagement\Infrastructure\Infrastructure.csproj", "{5EA2B739-642E-4DEF-B6CE-5C98EE2E1DA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -139,6 +141,18 @@ Global
 		{98484420-80FC-4CB4-B04B-2455346516E1}.Release|x64.Build.0 = Release|Any CPU
 		{98484420-80FC-4CB4-B04B-2455346516E1}.Release|x86.ActiveCfg = Release|Any CPU
 		{98484420-80FC-4CB4-B04B-2455346516E1}.Release|x86.Build.0 = Release|Any CPU
+		{5EA2B739-642E-4DEF-B6CE-5C98EE2E1DA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EA2B739-642E-4DEF-B6CE-5C98EE2E1DA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EA2B739-642E-4DEF-B6CE-5C98EE2E1DA0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5EA2B739-642E-4DEF-B6CE-5C98EE2E1DA0}.Debug|x64.Build.0 = Debug|Any CPU
+		{5EA2B739-642E-4DEF-B6CE-5C98EE2E1DA0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5EA2B739-642E-4DEF-B6CE-5C98EE2E1DA0}.Debug|x86.Build.0 = Debug|Any CPU
+		{5EA2B739-642E-4DEF-B6CE-5C98EE2E1DA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EA2B739-642E-4DEF-B6CE-5C98EE2E1DA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EA2B739-642E-4DEF-B6CE-5C98EE2E1DA0}.Release|x64.ActiveCfg = Release|Any CPU
+		{5EA2B739-642E-4DEF-B6CE-5C98EE2E1DA0}.Release|x64.Build.0 = Release|Any CPU
+		{5EA2B739-642E-4DEF-B6CE-5C98EE2E1DA0}.Release|x86.ActiveCfg = Release|Any CPU
+		{5EA2B739-642E-4DEF-B6CE-5C98EE2E1DA0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -155,5 +169,6 @@ Global
 		{2F212F80-9627-40C7-923B-715E1727AD3E} = {ABC6217F-A86F-4C8F-B5EB-9567F9D5A23B}
 		{D273B518-E40F-4429-B2DF-F37B794BE164} = {2F212F80-9627-40C7-923B-715E1727AD3E}
 		{98484420-80FC-4CB4-B04B-2455346516E1} = {2F212F80-9627-40C7-923B-715E1727AD3E}
+		{5EA2B739-642E-4DEF-B6CE-5C98EE2E1DA0} = {2F212F80-9627-40C7-923B-715E1727AD3E}
 	EndGlobalSection
 EndGlobal
