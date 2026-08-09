@@ -1,3 +1,3 @@
 namespace KShop.Commerce.OrderManagement.Application.OrderQueries;
 
-public sealed record GetOrderByIdQuery(Guid OrderId);
+public sealed record GetOrderQuery(Guid OrderId);
