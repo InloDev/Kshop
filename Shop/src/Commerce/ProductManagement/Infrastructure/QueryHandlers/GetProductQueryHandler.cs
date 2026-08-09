@@ -1,4 +1,4 @@
-using KShop.Commerce.ProductManagement.Application.Queries;
+using KShop.Commerce.ProductManagement.Application.ProductQueries;
 using KShop.Commerce.ProductManagement.Domain.ProductAggregate;
 using Microsoft.EntityFrameworkCore;
 
