@@ -61,7 +61,9 @@ public sealed class CreateOrderCommandHandlerTests
         _productRepository.SetProducts(new ProductDto(productId, "Product 1", 100, 0));
         var command = new CreateOrderCommand(userId, orderItems);
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => _handler.HandleAsync(command, CancellationToken.None));
+        var exception =
+            await Assert.ThrowsAsync<InvalidOperationException>(()
+                => _handler.HandleAsync(command, CancellationToken.None));
         Assert.Equal($"Product '{productId}' appears more than once in order items.", exception.Message);
     }
 
@@ -74,7 +76,9 @@ public sealed class CreateOrderCommandHandlerTests
             userId,
             new HashSet<CreateOrderItem> { new(missingProductId, 1) });
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => _handler.HandleAsync(command, CancellationToken.None));
+        var exception =
+            await Assert.ThrowsAsync<InvalidOperationException>(()
+                => _handler.HandleAsync(command, CancellationToken.None));
         Assert.Equal($"Product '{missingProductId}' was not found.", exception.Message);
     }
 }

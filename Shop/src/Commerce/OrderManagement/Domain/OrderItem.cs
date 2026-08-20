@@ -20,7 +20,7 @@ public sealed class OrderItem
         ArgumentException.ThrowIfNullOrWhiteSpace(productName);
         ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(unitPrice, 0);
         ArgumentOutOfRangeException.ThrowIfLessThan(quantity, 1);
-        ArgumentOutOfRangeException.ThrowIfLessThan(discount,0);
+        ArgumentOutOfRangeException.ThrowIfLessThan(discount, 0);
 
         Id = id;
         ProductId = productId;

@@ -14,7 +14,7 @@ public static class ApiServiceCollectionExtensions
         IWebHostEnvironment environment)
     {
         var connectionString = configuration.GetConnectionString("KShopPostgres")
-            ?? throw new InvalidOperationException("Connection string is not configured.");
+                               ?? throw new InvalidOperationException("Connection string is not configured.");
 
         services.AddProductManagement(connectionString);
 

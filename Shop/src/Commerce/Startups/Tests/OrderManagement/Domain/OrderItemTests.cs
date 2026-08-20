@@ -33,6 +33,7 @@ public sealed class OrderItemTests
             25.5m,
             0)
         );
+
     [Fact]
     public void Create_NullProductName_ThrowsArgumentException()
         => Assert.Throws<ArgumentNullException>(() => OrderItem.Create(
@@ -70,6 +71,7 @@ public sealed class OrderItemTests
                 unitPrice,
                 0);
         });
+
     [Fact]
     public void Create_InvalidDiscount_ThrowsOutOfRangeException()
         => Assert.Throws<ArgumentOutOfRangeException>(() =>

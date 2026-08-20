@@ -20,11 +20,11 @@ public sealed class CalculateOrderTotalAmountTests
             10m,
             8);
         var order = Order.Create(Guid.Empty,
-        new HashSet<OrderItem>
-        {
-            orderItem1,
-            orderItem2
-        });
+            new HashSet<OrderItem>
+            {
+                orderItem1,
+                orderItem2
+            });
         Assert.Equal(70, order.TotalAmount);
     }
 }
