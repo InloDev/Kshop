@@ -9,4 +9,8 @@
     <Compile Update="OrderStatusExtensions.cs"
              DependentUpon="OrderStatus.cs"/>
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="ReferenceTrimmer" Version="3.5.9"/>
+  </ItemGroup>
 </Project>
