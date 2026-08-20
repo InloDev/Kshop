@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>KShop.Commerce.OrderManagement.DependencyInjection</RootNamespace>
+    <AssemblyName>KShop.Commerce.OrderManagement.DependencyInjection</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.11"/>
+    <PackageReference Update="ReferenceTrimmer" Version="3.5.9"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj"/>
+  </ItemGroup>
+</Project>
