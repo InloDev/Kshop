@@ -10,22 +10,22 @@ public sealed class CreateOrderCommandHandler(
     {
         ArgumentNullException.ThrowIfNull(command);
 
-        var productIds = command.Items
-            .Select(item => item.ProductId)
+        var variantIds = command.Items
+            .Select(item => item.VariantId)
             .ToHashSet();
 
-        var productsById = await productRepository.GetByIdsAsync(productIds, cancellationToken);
+        var productsById = await productRepository.GetByIdsAsync(variantIds, cancellationToken);
 
         var orderItems = command.Items
             .Select(item =>
             {
-                if (!productsById.TryGetValue(item.ProductId, out var product))
+                if (!productsById.TryGetValue(item.VariantId, out var product))
                 {
-                    throw new InvalidOperationException($"Product '{item.ProductId}' was not found.");
+                    throw new InvalidOperationException($"Variant '{item.VariantId}' was not found.");
                 }
 
                 return OrderItem.Create(
-                    product.ProductId,
+                    product.VariantId,
                     product.ProductName,
                     item.Quantity,
                     product.UnitPrice,

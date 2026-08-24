@@ -27,7 +27,7 @@ public sealed class GetUserOrdersQueryHandler(OrderDbContext dbContext)
                 order.TotalAmount,
                 order.OrderItems.Select(item => new OrderItemDto(
                         item.Id,
-                        item.ProductId,
+                        item.VariantId,
                         item.ProductName,
                         item.Quantity,
                         item.UnitPrice,

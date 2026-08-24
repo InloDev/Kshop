@@ -3,7 +3,7 @@
 public sealed class OrderItem
 {
     public Guid Id { get; private set; }
-    public Guid ProductId { get; private set; }
+    public Guid VariantId { get; private set; }
     public string ProductName { get; private set; }
     public int Quantity { get; }
     public decimal UnitPrice { get; }
@@ -11,7 +11,7 @@ public sealed class OrderItem
 
     private OrderItem(
         Guid id,
-        Guid productId,
+        Guid variantId,
         string productName,
         int quantity,
         decimal unitPrice,
@@ -23,7 +23,7 @@ public sealed class OrderItem
         ArgumentOutOfRangeException.ThrowIfLessThan(discount, 0);
 
         Id = id;
-        ProductId = productId;
+        VariantId = variantId;
         ProductName = productName;
         Quantity = quantity;
         UnitPrice = unitPrice;
@@ -35,12 +35,12 @@ public sealed class OrderItem
 #nullable enable
 
     public static OrderItem Create(
-        Guid productId,
+        Guid variantId,
         string productName,
         int quantity,
         decimal unitPrice,
         decimal discount)
-        => new OrderItem(Guid.NewGuid(), productId, productName, quantity, unitPrice, discount);
+        => new OrderItem(Guid.NewGuid(), variantId, productName, quantity, unitPrice, discount);
 
     public decimal CalculateTotalPrice()
         => (UnitPrice - Discount) * Quantity;

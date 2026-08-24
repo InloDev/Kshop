@@ -99,6 +99,6 @@ public sealed class OrdersController
     private static IReadOnlySet<CreateOrderItem> MapItems(
         IReadOnlyCollection<CreateOrderItemRequest> items)
         => items
-            .Select(item => new CreateOrderItem(item.ProductId, item.Quantity))
+            .Select(item => new CreateOrderItem(item.VariantId, item.Quantity))
             .ToHashSet();
 }

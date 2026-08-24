@@ -29,7 +29,7 @@ internal sealed class OrderConfiguration : IEntityTypeConfiguration<Order>
                 orderItemBuilder.Property(item => item.Id).ValueGeneratedNever();
                 orderItemBuilder.HasKey(item => item.Id);
 
-                orderItemBuilder.Property(item => item.ProductId).IsRequired();
+                orderItemBuilder.Property(item => item.VariantId).IsRequired();
                 orderItemBuilder.Property(item => item.ProductName)
                     .IsRequired()
                     .HasMaxLength(256);

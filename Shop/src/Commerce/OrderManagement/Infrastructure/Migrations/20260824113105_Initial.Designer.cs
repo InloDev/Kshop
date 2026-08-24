@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KShop.Commerce.OrderManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(OrderDbContext))]
-    [Migration("20260820102125_Initial")]
+    [Migration("20260824113105_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -63,9 +63,6 @@ namespace KShop.Commerce.OrderManagement.Infrastructure.Migrations
                             b1.Property<Guid>("OrderId")
                                 .HasColumnType("uuid");
 
-                            b1.Property<Guid>("ProductId")
-                                .HasColumnType("uuid");
-
                             b1.Property<string>("ProductName")
                                 .IsRequired()
                                 .HasMaxLength(256)
@@ -76,6 +73,9 @@ namespace KShop.Commerce.OrderManagement.Infrastructure.Migrations
 
                             b1.Property<decimal>("UnitPrice")
                                 .HasColumnType("numeric");
+
+                            b1.Property<Guid>("VariantId")
+                                .HasColumnType("uuid");
 
                             b1.HasKey("Id");
 

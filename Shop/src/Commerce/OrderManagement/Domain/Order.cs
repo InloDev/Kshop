@@ -57,15 +57,15 @@ public sealed class Order
 
     private static void ValidateUniqueProducts(IEnumerable<OrderItem> orderItems)
     {
-        var duplicatedProductId = orderItems
-            .GroupBy(item => item.ProductId)
+        var duplicatedVariantId = orderItems
+            .GroupBy(item => item.VariantId)
             .FirstOrDefault(group => group.Count() > 1)
             ?.Key;
 
-        if (duplicatedProductId is not null)
+        if (duplicatedVariantId is not null)
         {
             throw new InvalidOperationException(
-                $"Product '{duplicatedProductId}' appears more than once in order items.");
+                $"Variant '{duplicatedVariantId}' appears more than once in order items.");
         }
     }
 

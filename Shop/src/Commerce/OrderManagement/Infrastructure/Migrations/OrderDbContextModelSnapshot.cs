@@ -60,9 +60,6 @@ namespace KShop.Commerce.OrderManagement.Infrastructure.Migrations
                             b1.Property<Guid>("OrderId")
                                 .HasColumnType("uuid");
 
-                            b1.Property<Guid>("ProductId")
-                                .HasColumnType("uuid");
-
                             b1.Property<string>("ProductName")
                                 .IsRequired()
                                 .HasMaxLength(256)
@@ -73,6 +70,9 @@ namespace KShop.Commerce.OrderManagement.Infrastructure.Migrations
 
                             b1.Property<decimal>("UnitPrice")
                                 .HasColumnType("numeric");
+
+                            b1.Property<Guid>("VariantId")
+                                .HasColumnType("uuid");
 
                             b1.HasKey("Id");
 

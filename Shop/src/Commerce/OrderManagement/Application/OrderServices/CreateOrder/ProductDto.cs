@@ -1,7 +1,7 @@
 namespace KShop.Commerce.OrderManagement.Application.OrderServices.CreateOrder;
 
 public sealed record ProductDto(
-    Guid ProductId,
+    Guid VariantId,
     string ProductName,
     decimal UnitPrice,
     decimal Discount);

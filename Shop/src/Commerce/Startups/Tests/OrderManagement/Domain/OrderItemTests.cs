@@ -15,7 +15,7 @@ public sealed class OrderItemTests
             5);
 
         Assert.NotEqual(orderItem.Id, Guid.Empty);
-        Assert.NotEqual(orderItem.ProductId, Guid.Empty);
+        Assert.NotEqual(orderItem.VariantId, Guid.Empty);
         Assert.Equal("Test Product", orderItem.ProductName);
         Assert.Equal(10, orderItem.Quantity);
         Assert.Equal(25.5m, orderItem.UnitPrice);
