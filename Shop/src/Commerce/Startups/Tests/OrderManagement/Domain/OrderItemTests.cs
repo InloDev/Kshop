@@ -15,7 +15,7 @@ public sealed class OrderItemTests
             5);
 
         Assert.NotEqual(orderItem.Id, Guid.Empty);
-        Assert.NotEqual(orderItem.ProductId, Guid.Empty);
+        Assert.NotEqual(orderItem.VariantId, Guid.Empty);
         Assert.Equal("Test Product", orderItem.ProductName);
         Assert.Equal(10, orderItem.Quantity);
         Assert.Equal(25.5m, orderItem.UnitPrice);
@@ -33,6 +33,7 @@ public sealed class OrderItemTests
             25.5m,
             0)
         );
+
     [Fact]
     public void Create_NullProductName_ThrowsArgumentException()
         => Assert.Throws<ArgumentNullException>(() => OrderItem.Create(
@@ -70,6 +71,7 @@ public sealed class OrderItemTests
                 unitPrice,
                 0);
         });
+
     [Fact]
     public void Create_InvalidDiscount_ThrowsOutOfRangeException()
         => Assert.Throws<ArgumentOutOfRangeException>(() =>

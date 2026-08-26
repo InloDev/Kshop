@@ -2,7 +2,7 @@ namespace KShop.Commerce.OrderManagement.Application.OrderQueries;
 
 public sealed record OrderItemDto(
     Guid Id,
-    Guid ProductId,
+    Guid VariantId,
     string ProductName,
     int Quantity,
     decimal UnitPrice,

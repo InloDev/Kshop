@@ -29,4 +29,8 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="ReferenceTrimmer" Version="3.5.9"/>
+  </ItemGroup>
+
 </Project>

@@ -4,24 +4,24 @@ namespace KShop.Commerce.Startups.Tests.OrderManagement.Application;
 
 internal sealed class ProductReadOnlyRepositoryStub : IProductReadOnlyRepository
 {
-    private IReadOnlyDictionary<Guid, ProductDto> _productsById = new Dictionary<Guid, ProductDto>();
+    private IReadOnlyDictionary<Guid, ProductDto> _productsByVariantId = new Dictionary<Guid, ProductDto>();
 
-    public IReadOnlyCollection<Guid>? RequestedProductIds { get; private set; }
+    public IReadOnlyCollection<Guid>? RequestedVariantIds { get; private set; }
     public CancellationToken CancellationToken { get; private set; }
 
     public void SetProducts(params ProductDto[] products)
-        => _productsById = products.ToDictionary(product => product.ProductId);
+        => _productsByVariantId = products.ToDictionary(product => product.VariantId);
 
     public Task<IReadOnlyDictionary<Guid, ProductDto>> GetByIdsAsync(
-        IReadOnlyCollection<Guid> productIds,
+        IReadOnlyCollection<Guid> variantIds,
         CancellationToken cancellationToken)
     {
-        RequestedProductIds = productIds;
+        RequestedVariantIds = variantIds;
         CancellationToken = cancellationToken;
 
-        var requestedProducts = productIds
-            .Where(productId => _productsById.ContainsKey(productId))
-            .ToDictionary(productId => productId, productId => _productsById[productId]);
+        var requestedProducts = variantIds
+            .Where(variantId => _productsByVariantId.ContainsKey(variantId))
+            .ToDictionary(variantId => variantId, variantId => _productsByVariantId[variantId]);
 
         return Task.FromResult<IReadOnlyDictionary<Guid, ProductDto>>(requestedProducts);
     }

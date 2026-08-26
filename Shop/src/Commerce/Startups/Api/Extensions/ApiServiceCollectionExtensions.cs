@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Hellang.Middleware.ProblemDetails;
+using KShop.Commerce.OrderManagement.DependencyInjection;
 using KShop.Commerce.ProductManagement.DependencyInjection;
 using KShop.Commerce.Startups.Api.JsonConverters;
 
@@ -14,9 +15,10 @@ public static class ApiServiceCollectionExtensions
         IWebHostEnvironment environment)
     {
         var connectionString = configuration.GetConnectionString("KShopPostgres")
-            ?? throw new InvalidOperationException("Connection string is not configured.");
+                               ?? throw new InvalidOperationException("Connection string is not configured.");
 
         services.AddProductManagement(connectionString);
+        services.AddOrderManagement(connectionString);
 
         services.AddProblemDetails(options =>
         {

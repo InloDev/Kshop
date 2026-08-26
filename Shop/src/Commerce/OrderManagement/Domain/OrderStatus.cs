@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace KShop.Commerce.OrderManagement.Domain;
+﻿namespace KShop.Commerce.OrderManagement.Domain;
 
 public enum OrderStatus
 {

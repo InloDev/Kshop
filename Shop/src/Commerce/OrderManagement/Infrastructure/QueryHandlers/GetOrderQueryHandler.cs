@@ -28,7 +28,7 @@ public sealed class GetOrderQueryHandler(OrderDbContext context)
             OrderItems: order.OrderItems
                 .Select(item => new OrderItemDto(
                     Id: item.Id,
-                    ProductId: item.ProductId,
+                    VariantId: item.VariantId,
                     ProductName: item.ProductName,
                     Quantity: item.Quantity,
                     UnitPrice: item.UnitPrice,

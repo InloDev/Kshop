@@ -20,21 +20,22 @@ internal sealed class OrderConfiguration : IEntityTypeConfiguration<Order>
         orderBuilder.Property(order => order.TotalAmount).IsRequired();
         orderBuilder.Property(order => order.DeletedAt).IsRequired();
 
-        orderBuilder.OwnsMany(order => order.OrderItems, orderItemBuilder =>
-        {
-            orderItemBuilder.ToTable("order_items");
-            orderItemBuilder.WithOwner().HasForeignKey("OrderId");
+        orderBuilder.OwnsMany(order => order.OrderItems,
+            orderItemBuilder =>
+            {
+                orderItemBuilder.ToTable("order_items");
+                orderItemBuilder.WithOwner().HasForeignKey("OrderId");
 
-            orderItemBuilder.Property(item => item.Id).ValueGeneratedNever();
-            orderItemBuilder.HasKey(item => item.Id);
+                orderItemBuilder.Property(item => item.Id).ValueGeneratedNever();
+                orderItemBuilder.HasKey(item => item.Id);
 
-            orderItemBuilder.Property(item => item.ProductId).IsRequired();
-            orderItemBuilder.Property(item => item.ProductName)
-                .IsRequired()
-                .HasMaxLength(256);
-            orderItemBuilder.Property(item => item.Quantity).IsRequired();
-            orderItemBuilder.Property(item => item.UnitPrice).IsRequired();
-            orderItemBuilder.Property(item => item.Discount).IsRequired();
-        });
+                orderItemBuilder.Property(item => item.VariantId).IsRequired();
+                orderItemBuilder.Property(item => item.ProductName)
+                    .IsRequired()
+                    .HasMaxLength(256);
+                orderItemBuilder.Property(item => item.Quantity).IsRequired();
+                orderItemBuilder.Property(item => item.UnitPrice).IsRequired();
+                orderItemBuilder.Property(item => item.Discount).IsRequired();
+            });
     }
 }

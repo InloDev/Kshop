@@ -19,17 +19,17 @@ public sealed class CreateOrderCommandHandlerTests
     public async Task HandleAsync_ValidCommand_CreateOrderAndAddToRepository()
     {
         var userId = Guid.NewGuid();
-        var productId1 = Guid.NewGuid();
-        var productId2 = Guid.NewGuid();
+        var variantId1 = Guid.NewGuid();
+        var variantId2 = Guid.NewGuid();
         var orderItems = new HashSet<CreateOrderItem>
         {
-            new(productId1, 2),
-            new(productId2, 1)
+            new(variantId1, 2),
+            new(variantId2, 1)
         };
 
         _productRepository.SetProducts(
-            new ProductDto(productId1, "Product 1", 100, 10),
-            new ProductDto(productId2, "Product 2", 200, 0));
+            new ProductDto(variantId1, "Product 1", 100, 10),
+            new ProductDto(variantId2, "Product 2", 200, 0));
 
         var command = new CreateOrderCommand(userId, orderItems);
         var cancellationToken = CancellationToken.None;
@@ -48,33 +48,37 @@ public sealed class CreateOrderCommandHandlerTests
         => await Assert.ThrowsAsync<ArgumentNullException>(() => _handler.HandleAsync(null!, CancellationToken.None));
 
     [Fact]
-    public async Task HandleAsync_DuplicateProductsInOrderItems_ThrowsInvalidOperationException()
+    public async Task HandleAsync_DuplicateVariantsInOrderItems_ThrowsInvalidOperationException()
     {
         var userId = Guid.NewGuid();
-        var productId = Guid.NewGuid();
+        var variantId = Guid.NewGuid();
         var orderItems = new HashSet<CreateOrderItem>
         {
-            new CreateOrderItem(productId, 1),
-            new CreateOrderItem(productId, 2)
+            new CreateOrderItem(variantId, 1),
+            new CreateOrderItem(variantId, 2)
         };
 
-        _productRepository.SetProducts(new ProductDto(productId, "Product 1", 100, 0));
+        _productRepository.SetProducts(new ProductDto(variantId, "Product 1", 100, 0));
         var command = new CreateOrderCommand(userId, orderItems);
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => _handler.HandleAsync(command, CancellationToken.None));
-        Assert.Equal($"Product '{productId}' appears more than once in order items.", exception.Message);
+        var exception =
+            await Assert.ThrowsAsync<InvalidOperationException>(()
+                => _handler.HandleAsync(command, CancellationToken.None));
+        Assert.Equal($"Variant '{variantId}' appears more than once in order items.", exception.Message);
     }
 
     [Fact]
-    public async Task HandleAsync_ProductNotFound_ThrowsInvalidOperationException()
+    public async Task HandleAsync_VariantNotFound_ThrowsInvalidOperationException()
     {
         var userId = Guid.NewGuid();
-        var missingProductId = Guid.NewGuid();
+        var missingVariantId = Guid.NewGuid();
         var command = new CreateOrderCommand(
             userId,
-            new HashSet<CreateOrderItem> { new(missingProductId, 1) });
+            new HashSet<CreateOrderItem> { new(missingVariantId, 1) });
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => _handler.HandleAsync(command, CancellationToken.None));
-        Assert.Equal($"Product '{missingProductId}' was not found.", exception.Message);
+        var exception =
+            await Assert.ThrowsAsync<InvalidOperationException>(()
+                => _handler.HandleAsync(command, CancellationToken.None));
+        Assert.Equal($"Variant '{missingVariantId}' was not found.", exception.Message);
     }
 }
